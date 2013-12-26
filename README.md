@@ -5,7 +5,7 @@ This module provides Markdown Editing and Conversion utilities for Yii Framework
 
 ### MarkdownConverter
 [```VIEW DEMO```](http://demos.krajee.com/markdown-details/markdown-converter)  
-This is a markdown converter class that extends [Yii's Markdown conversion](https://github.com/yiisoft/yii2/blob/master/framework/yii/helpers/Markdown.php) helper with advanced functionality. The converter uses [PHP Markdown Extra](http://michelf.ca/projects/php-markdown/extra/) and [PHP SmartyPants](http://michelf.ca/projects/php-smartypants/) for processing Markdown conversion to HTML. It also supports configurable custom conversion processing of patterns for styling your own flavour of Markdown to some extent.
+This is a markdown converter class that extends [Yii's Markdown conversion](https://github.com/yiisoft/yii2/blob/master/framework/yii/helpers/Markdown.php) helper with advanced functionality. The converter uses [PHP Markdown Extra](http://michelf.ca/projects/php-markdown/extra/) and [PHP Smarty Pants](http://michelf.ca/projects/php-smartypants/) for processing Markdown conversion to HTML. It also supports configurable custom conversion processing of patterns for styling your own flavour of Markdown to some extent.
 
 ### MarkdownEditor
 [```VIEW DEMO```](http://demos.krajee.com/markdown-details/markdown-editor)  
@@ -14,7 +14,7 @@ This is an advanced markdown input widget with configurable options. It is style
 1. Implements a configurable toolbar for live editing from the editor
 2. Toggle live preview of Markdown formatted text as HTML
 3. Toggle editor for full screen editing
-4. Implements PHP Markdown Extra and PHP SmartyPants functionality as provided by the MarkdownConverter.
+4. Implements PHP Markdown Extra and PHP Smarty Pants functionality as provided by the MarkdownConverter.
 5. Uses Twitter Bootstrap 3.0 styling wherever possible with inbuilt Yii 2.0 ActiveField functionality.
 6. Allows saving/exporting of the text-editor contents as Text or HTML
 7. Configurable header, footer, and input options.
