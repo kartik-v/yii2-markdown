@@ -29,8 +29,8 @@ class Markdown extends \yii\helpers\Markdown
 	 * @param string $content
 	 * @param array $config. Options to configure MarkdownExtra and smarty
 	 * - markdown: array for MarkdownExtra configuration parameters
-	 * - smarty: array for smarty configuration parameters
-	 * - custom: array for custom configuration parameters
+	 * - smarty: array for SmartyPants configuration parameters
+	 * - custom: array for Custom configuration parameters
 	 * @param int $smartyMode the SmartyPants processing mode
 	 * @return string
 	 * @throws InvalidConfigException if module not set
