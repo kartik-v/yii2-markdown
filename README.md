@@ -104,7 +104,7 @@ echo MarkdownEditor::widget([
 
 // usage without model
 echo MarkdownEditor::widget([
-	'name' => $markdown, 
+	'name' => 'markdown', 
 	'value' => $value,
 ]);
 ```
