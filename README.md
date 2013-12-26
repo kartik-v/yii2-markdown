@@ -3,7 +3,7 @@
 
 This module provides Markdown Editing and Conversion utilities for Yii Framework 2.0. It implements markdown conversion using [PHP Markdown Extra](http://michelf.ca/projects/php-markdown/extra/) and [PHP SmartyPants](http://michelf.ca/projects/php-smartypants/). It includes an enhanced customized Markdown Editor Widget for markdown editing and preview at runtime. This widget is styled using Twitter Bootstrap 3.0.
 
-### MarkdownConverter
+### Markdown
 [```VIEW DEMO```](http://demos.krajee.com/markdown-details/markdown-converter)  
 This is a markdown converter class that extends [Yii's Markdown Helper](https://github.com/yiisoft/yii2/blob/master/framework/yii/helpers/Markdown.php) with advanced functionality. The converter uses [PHP Markdown Extra](http://michelf.ca/projects/php-markdown/extra/) and [PHP SmartyPants](http://michelf.ca/projects/php-smartypants/) for processing Markdown conversion to HTML. It also supports configurable custom conversion processing of patterns for styling your own flavour of Markdown to some extent.
 
@@ -74,15 +74,15 @@ You can setup additional configuration options for the `markdown` module:
 ];
 ```
 
-### MarkdownConverter
+### Markdown
 ```php
-use kartik\markdown\MarkdownConverter;
+use kartik\markdown\Markdown;
 
 // default call
-echo MarkdownConverter::process($content);
+echo MarkdownConverter::convert($content);
 
 // with custom post processing
-echo MarkdownConverter::process($content, ['custom' => [
+echo MarkdownConverter::convert($content, ['custom' => [
 	'<h1>' => '<h1 class="custom-h1>',
 	'<h2>' => '<h1 class="custom-h2>',
 ]]);
