@@ -12,7 +12,7 @@ use yii\base\InvalidConfigException;
  * @author Kartik Visweswaran <kartikv2@gmail.com>
  * @since 1.0
  */
-class MarkdownConverter extends \yii\helpers\Markdown 
+class Markdown extends \yii\helpers\Markdown 
 {	
 	# SmartyPants does nothing at all
 	const  SMARTYPANTS_ATTR_DO_NOTHING             =  0;
@@ -22,16 +22,6 @@ class MarkdownConverter extends \yii\helpers\Markdown
 	const  SMARTYPANTS_ATTR_LONG_EM_DASH_SHORT_EN  =  2;
 	# "--" for em-dashes; "---" for en-dashes  
 	const  SMARTYPANTS_ATTR_SHORT_EM_DASH_LONG_EN  =  3;
-
-	/**
-	 * @var SmartyPants
-	 */
-	protected static $smarty;
-	
-	/**
-	 * @var int SmartyPants Mode
-	 */
-	public static $smartyMode = self::SMARTYPANTS_ATTR_LONG_EM_DASH_SHORT_EN;
 	
 	/**
 	 * Converts markdown into HTML
@@ -41,10 +31,11 @@ class MarkdownConverter extends \yii\helpers\Markdown
 	 * - markdown: array for MarkdownExtra configuration parameters
 	 * - smarty: array for smarty configuration parameters
 	 * - custom: array for custom configuration parameters
+	 * @param int $smartyMode the SmartyPants processing mode
 	 * @return string
 	 * @throws InvalidConfigException if module not set
 	 */
-	public static function process($content, $config = []) {
+	public static function convert($content, $config = [], $smartyMode = self::SMARTYPANTS_ATTR_LONG_EM_DASH_SHORT_EN) {
 		$module = \Yii::$app->getModule('markdown');
 		if ($module === null) {
 			throw new InvalidConfigException("The module 'markdown' was not found. Ensure you have setup the 'markdown' module in your Yii configuration file.");
@@ -55,14 +46,12 @@ class MarkdownConverter extends \yii\helpers\Markdown
 			$output = parent::process($content, $mdConfig);
 			if ($module->smartyPants) {
 				$smConfig = empty($config['smarty']) ? [] : $config['smarty'];
-				if (static::$smarty === null) {
-					static::$smarty = new SmartyPants(static::$smartyMode);
-				}
+				$smarty = new SmartyPants($smartyMode);
 				foreach ($smConfig as $name => $value) {
-					static::$smarty->{$name} = $value;
+					$smarty->{$name} = $value;
 				}
-				$output = static::$smarty->transform($output);
-				$cuConfig = empty($config['custom']) ? [] : $config['custom'];
+				$output = $smarty->transform($output);
+				$cuConfig = empty($config['custom']) ? $module->customConversion : $config['custom'];
 				$output = static::customProcess($output, $cuConfig);
 			}
 		}
