@@ -55,7 +55,6 @@ Add `markdown` to your modules section of your Yii configuration file
 You can setup additional configuration options for the `markdown` module:
 ```php
 'modules' = [
-	...
 	'markdown' => [
 		// the module class
 		'class' => 'kartik\markdown\Module',
@@ -72,7 +71,6 @@ You can setup additional configuration options for the `markdown` module:
 		'smartyPants' => true
 		
 	]
-	...
 ];
 ```
 
