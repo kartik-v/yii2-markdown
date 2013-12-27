@@ -120,11 +120,6 @@ EOT;
 	 */
 	public $previewOptions = ['class' => 'kv-md-preview'];
 	/**
-	 * @var string the content shown in preview window
-	 * while loading/processing the preview
-	 */
-	public $previewProgress;
-	/**
 	 * @var array the HTML attributes for all toolbar button groups
 	 * used in the header and footer
 	 */
@@ -172,6 +167,11 @@ EOT;
 	 * @var string message displayed if preview is empty
 	 */	
 	public $emptyPreview;
+	/**
+	 * @var string the content shown in preview window
+	 * while loading / processing the preview
+	 */
+	public $previewProgress;
 	/**
 	 * @var string alert message displayed before saving output as Text
 	 */
