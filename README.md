@@ -1,5 +1,5 @@
- yii2-markdown
-==============
+yii2-markdown
+=============
 
 This module provides Markdown Editing and Conversion utilities for Yii Framework 2.0. It implements markdown conversion using PHP Markdown Extra and PHP Smarty Pants. In addition, you can customize the flavor of Markdown, by including additional custom conversion patterns. The module also includes an enhanced customized Markdown Editor Widget for markdown editing and preview at runtime. This widget is styled using Twitter Bootstrap 3.0. View a [complete demo](http://localhost/yii-kv/site/markdown-demo).
 
