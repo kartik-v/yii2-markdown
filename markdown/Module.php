@@ -2,6 +2,12 @@
 
 namespace kartik\markdown;
 
+/**
+ * A Markdown conversion and editing module for Yii Framework 2.0
+ *
+ * @author Kartik Visweswaran <kartikv2@gmail.com>
+ * @since 1.0
+ */
 class Module extends \yii\base\Module {
 	/**
 	 * @var string the namespace of the module's controller classes
