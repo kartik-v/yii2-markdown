@@ -124,9 +124,12 @@
 
 .kv-loading {
 	background-image: url('../img/loading.gif');
-	background-position: center center;
+	background-position: center bottom;
     background-repeat:no-repeat;
     z-index:1000;
     cursor:wait;
     opacity: 0.4;
+	height: 50px;
+	text-align: center;
+	font-size: 18px;
 }
