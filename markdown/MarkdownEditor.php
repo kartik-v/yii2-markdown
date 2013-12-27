@@ -42,7 +42,7 @@ class MarkdownEditor extends \yii\widgets\InputWidget {
 	/**
 	 * Heading dropdown items
 	 */
-    const BTN_H1 = 101;
+	const BTN_H1 = 101;
 	const BTN_H2 = 102;
 	const BTN_H3 = 103;
 	const BTN_H4 = 104;
@@ -52,7 +52,7 @@ class MarkdownEditor extends \yii\widgets\InputWidget {
 	/**
 	 * Footer toolbar button constants
 	 */
-    const BTN_PREVIEW = 50;
+	const BTN_PREVIEW = 50;
 	const BTN_SAVE = 51;
 	const BTN_SAVE_1 = 52;
 	const BTN_SAVE_2 = 53;
@@ -100,7 +100,7 @@ EOT;
 	 * @var array the HTML attributes for the container
 	 * holding the header, input, and footer
 	 */
-    public $options = ['class' => 'kv-md-editor'];
+	public $options = ['class' => 'kv-md-editor'];
 	/**
 	 * @var array the HTML attributes for the header
 	 */
@@ -108,7 +108,7 @@ EOT;
 	/**
 	 * @var array the HTML attributes for the textarea input
 	 */
-    public $inputOptions = ['class' => 'kv-md-input'];
+	public $inputOptions = ['class' => 'kv-md-input'];
 	/**
 	 * @var array the HTML attributes for the footer
 	 */
