@@ -42,7 +42,7 @@ class MarkdownEditor extends \yii\widgets\InputWidget {
 	/**
 	 * Heading dropdown items
 	 */
-	const BTN_H1 = 101;
+    const BTN_H1 = 101;
 	const BTN_H2 = 102;
 	const BTN_H3 = 103;
 	const BTN_H4 = 104;
@@ -52,7 +52,7 @@ class MarkdownEditor extends \yii\widgets\InputWidget {
 	/**
 	 * Footer toolbar button constants
 	 */
-	const BTN_PREVIEW = 50;
+    const BTN_PREVIEW = 50;
 	const BTN_SAVE = 51;
 	const BTN_SAVE_1 = 52;
 	const BTN_SAVE_2 = 53;
@@ -100,7 +100,7 @@ EOT;
 	 * @var array the HTML attributes for the container
 	 * holding the header, input, and footer
 	 */
-	public $options = ['class' => 'kv-md-editor'];
+    public $options = ['class' => 'kv-md-editor'];
 	/**
 	 * @var array the HTML attributes for the header
 	 */
@@ -108,7 +108,7 @@ EOT;
 	/**
 	 * @var array the HTML attributes for the textarea input
 	 */
-	public $inputOptions = ['class' => 'kv-md-input'];
+    public $inputOptions = ['class' => 'kv-md-input'];
 	/**
 	 * @var array the HTML attributes for the footer
 	 */
@@ -118,7 +118,12 @@ EOT;
 	 * container which will display the converted
 	 * HTML text
 	 */
-	public $previewOptions = ['class' => 'kv-md-preview'];	
+	public $previewOptions = ['class' => 'kv-md-preview'];
+	/**
+	 * @var string the content shown in preview window
+	 * while loading/processing the preview
+	 */
+	public $previewProgress;
 	/**
 	 * @var array the HTML attributes for all toolbar button groups
 	 * used in the header and footer
@@ -435,6 +440,9 @@ EOT;
 				'th[align="right"]{text-align:right!important;}' .
 				'th[align="center"]{text-align:center!important;}');
 		}
+		if (!isset($this->previewProgress)) {
+			$this->previewProgress = '<div class="kv-loading">' . Yii::t('app', 'Loading Preview ') . '&hellip;</div>';
+		}
 	}
 
 	/**
@@ -468,6 +476,7 @@ EOT;
 			'source' => '#' . $this->inputOptions['id'],
 			'target' => '#' . $this->previewOptions['id'],
 			'preview' => '#' . $this->getButtonId(self::BTN_PREVIEW),
+			'progress' => $this->previewProgress,
 			'maximize' => '#' . $this->getButtonId(self::BTN_MAXIMIZE),
 			'url' => Yii::$app->controller->createUrl($this->_module->previewAction),
 			'save1' => '#' . $this->getButtonId(self::BTN_SAVE_1),

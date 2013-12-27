@@ -70,6 +70,7 @@ function togglePreview(params) {
             source = params.source,
             target = params.target,
             url = params.url,
+			progress = params.progress,
             nullMsg = params.nullMsg;
 
     $(preview).toggleClass('active');
@@ -87,14 +88,11 @@ function togglePreview(params) {
                 nullMsg: nullMsg
             },
 			beforeSend: function() {
-				$(target).addClass('kv-loading');
-			},
-			complete: function() {
-				$(target).removeClass('kv-loading');
+				$(target).html(progress);
 			},
             success: function(data) {
                 if (data) {
-                    $(target).html(data);
+                   $(target).html(data);
                 } else {
                     alert('HTML preview failed! Try again later.'); //testing purpose
                 }
