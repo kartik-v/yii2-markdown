@@ -50,17 +50,16 @@ to the ```require``` section of your `composer.json` file.
 Add `markdown` to your modules section of your Yii configuration file
 ```php
 'modules' = [
-	...
+	/* other modules */
 	'markdown' => [
 		'class' => 'kartik\markdown\Module',
 	]
-	...
 ];
 ```
 You can setup additional configuration options for the `markdown` module:
 ```php
 'modules' = [
-	...
+	/* other modules */
 	'markdown' => [
 		// the module class
 		'class' => 'kartik\markdown\Module',
@@ -77,7 +76,6 @@ You can setup additional configuration options for the `markdown` module:
 		'smartyPants' => true
 		
 	]
-	...
 ];
 ```
 
