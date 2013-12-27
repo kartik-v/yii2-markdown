@@ -84,10 +84,10 @@ You can setup additional configuration options for the `markdown` module:
 use kartik\markdown\Markdown;
 
 // default call
-echo Markdown::process($content);
+echo Markdown::convert($content);
 
 // with custom post processing
-echo Markdown::process($content, ['custom' => [
+echo Markdown::convert($content, ['custom' => [
 	'<h1>' => '<h1 class="custom-h1>',
 	'<h2>' => '<h1 class="custom-h2>',
 ]]);
