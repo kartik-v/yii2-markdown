@@ -108,7 +108,7 @@ EOT;
 	/**
 	 * @var array the HTML attributes for the textarea input
 	 */
-    public $inputOptions = ['class' => 'kv-md-input'];	public $buttonGroupOptions = [];
+    public $inputOptions = ['class' => 'kv-md-input'];
 	/**
 	 * @var array the HTML attributes for the footer
 	 */
@@ -118,7 +118,12 @@ EOT;
 	 * container which will display the converted
 	 * HTML text
 	 */
-	public $previewOptions = ['class' => 'kv-md-preview'];
+	public $previewOptions = ['class' => 'kv-md-preview'];	
+	/**
+	 * @var array the HTML attributes for all toolbar button groups
+	 * used in the header and footer
+	 */
+	public $buttonGroupOptions = [];
 	/**
 	 * @var array the HTML attributes for all toolbar buttons 
 	 * used in the header and footer
