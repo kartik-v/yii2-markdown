@@ -15,7 +15,7 @@ This is an advanced markdown input widget with configurable options. It is style
 1. Configurable toolbar and buttons for formatting content
 2. Live preview of Markdown formatted text as HTML
 3. Maximize editor for full screen editing
-4. Implements PHP Markdown Extra and PHP SmartyPants functionality as provided by the MarkdownConverter.
+4. Implements PHP Markdown Extra and PHP SmartyPants functionality as provided by the Markdown.
 5. Uses Twitter Bootstrap 3.0 styling wherever possible
 6. Allows saving/exporting of the text-editor contents as Text or HTML
 7. Configurable header, footer, and input options.
@@ -81,13 +81,13 @@ You can setup additional configuration options for the `markdown` module:
 
 ### Markdown
 ```php
-use kartik\markdown\MarkdownConverter;
+use kartik\markdown\Markdown;
 
 // default call
-echo MarkdownConverter::process($content);
+echo Markdown::process($content);
 
 // with custom post processing
-echo MarkdownConverter::process($content, ['custom' => [
+echo Markdown::process($content, ['custom' => [
 	'<h1>' => '<h1 class="custom-h1>',
 	'<h2>' => '<h1 class="custom-h2>',
 ]]);
