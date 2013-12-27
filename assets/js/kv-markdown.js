@@ -74,7 +74,11 @@ function togglePreview(params) {
 
     $(preview).toggleClass('active');
     if ($(target).hasClass('hidden')) {
-        $.ajax({
+        disableButtons(editor)
+        $(preview).removeAttr('disabled')
+        $(source).addClass('hidden');
+        $(target).removeClass('hidden');
+       $.ajax({
             type: "POST",
             url: url,
             dataType: "json",
@@ -82,6 +86,12 @@ function togglePreview(params) {
                 source: $(source).val(),
                 nullMsg: nullMsg
             },
+			beforeSend: function() {
+				$(target).addClass('kv-loading');
+			},
+			complete: function() {
+				$(target).removeClass('kv-loading');
+			},
             success: function(data) {
                 if (data) {
                     $(target).html(data);
@@ -90,10 +100,6 @@ function togglePreview(params) {
                 }
             }
         });
-        disableButtons(editor)
-        $(preview).removeAttr('disabled')
-        $(source).addClass('hidden');
-        $(target).removeClass('hidden');
         $(target).focus();
     } else {
         enableButtons(editor)
