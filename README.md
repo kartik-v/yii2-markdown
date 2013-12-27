@@ -1,23 +1,27 @@
  yii2-markdown
 ==============
 
-This module provides Markdown Editing and Conversion utilities for Yii Framework 2.0. It implements markdown conversion using [PHP Markdown Extra](http://michelf.ca/projects/php-markdown/extra/) and [PHP SmartyPants](http://michelf.ca/projects/php-smartypants/). It includes an enhanced customized Markdown Editor Widget for markdown editing and preview at runtime. This widget is styled using Twitter Bootstrap 3.0.
+This module provides Markdown Editing and Conversion utilities for Yii Framework 2.0. It implements markdown conversion using PHP Markdown Extra and PHP Smarty Pants. In addition, you can customize the flavor of Markdown, by including additional custom conversion patterns. The module also includes an enhanced customized Markdown Editor Widget for markdown editing and preview at runtime. This widget is styled using Twitter Bootstrap 3.0. View a [complete demo](http://localhost/yii-kv/site/markdown-demo).
 
-### Markdown
+### MarkdownConverter
 [```VIEW DEMO```](http://demos.krajee.com/markdown-details/markdown-converter)  
 This is a markdown converter class that extends [Yii's Markdown Helper](https://github.com/yiisoft/yii2/blob/master/framework/yii/helpers/Markdown.php) with advanced functionality. The converter uses [PHP Markdown Extra](http://michelf.ca/projects/php-markdown/extra/) and [PHP SmartyPants](http://michelf.ca/projects/php-smartypants/) for processing Markdown conversion to HTML. It also supports configurable custom conversion processing of patterns for styling your own flavour of Markdown to some extent.
+View [examples and details](http://localhost/yii-kv/markdown-details/markdown-converter) or view a [complete demo](http://localhost/yii-kv/site/markdown-demo).
 
 ### MarkdownEditor
 [```VIEW DEMO```](http://demos.krajee.com/markdown-details/markdown-editor)  
 This is an advanced markdown input widget with configurable options. It is styled using Twitter Bootstrap 3.0. Key features available with this widget are:
 
-1. Implements a configurable toolbar for live editing from the editor
-2. Toggle live preview of Markdown formatted text as HTML
-3. Toggle editor for full screen editing
-4. Implements PHP Markdown Extra and PHP Smarty Pants functionality as provided by the MarkdownConverter.
-5. Uses Twitter Bootstrap 3.0 styling wherever possible with inbuilt Yii 2.0 ActiveField functionality.
+1. Configurable toolbar and buttons for formatting content
+2. Live preview of Markdown formatted text as HTML
+3. Maximize editor for full screen editing
+4. Implements PHP Markdown Extra and PHP SmartyPants functionality as provided by the MarkdownConverter.
+5. Uses Twitter Bootstrap 3.0 styling wherever possible
 6. Allows saving/exporting of the text-editor contents as Text or HTML
 7. Configurable header, footer, and input options.
+8. Supports localization and customization of messages and content.
+
+View [examples and details](http://localhost/yii-kv/markdown-details/markdown-editor) or view a [complete demo](http://localhost/yii-kv/site/markdown-demo).
 
 ### Demo
 You can see a [demonstration here](http://demos.krajee.com/markdown) on usage of these functions with documentation and examples.
@@ -46,15 +50,17 @@ to the ```require``` section of your `composer.json` file.
 Add `markdown` to your modules section of your Yii configuration file
 ```php
 'modules' = [
-	/* your other modules */
+	...
 	'markdown' => [
 		'class' => 'kartik\markdown\Module',
 	]
+	...
 ];
 ```
 You can setup additional configuration options for the `markdown` module:
 ```php
 'modules' = [
+	...
 	'markdown' => [
 		// the module class
 		'class' => 'kartik\markdown\Module',
@@ -71,18 +77,19 @@ You can setup additional configuration options for the `markdown` module:
 		'smartyPants' => true
 		
 	]
+	...
 ];
 ```
 
-### Markdown
+### MarkdownConverter
 ```php
-use kartik\markdown\Markdown;
+use kartik\markdown\MarkdownConverter;
 
 // default call
-echo MarkdownConverter::convert($content);
+echo MarkdownConverter::process($content);
 
 // with custom post processing
-echo MarkdownConverter::convert($content, ['custom' => [
+echo MarkdownConverter::process($content, ['custom' => [
 	'<h1>' => '<h1 class="custom-h1>',
 	'<h2>' => '<h1 class="custom-h2>',
 ]]);
