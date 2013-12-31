@@ -17,6 +17,7 @@ use yii\base\InvalidConfigException;
  * @since 1.0
  */
 class MarkdownEditor extends \yii\widgets\InputWidget {
+
 	/**
 	 * Header toolbar button constants
 	 */

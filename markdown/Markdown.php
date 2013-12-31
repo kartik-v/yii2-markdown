@@ -13,7 +13,8 @@ use yii\base\InvalidConfigException;
  * @since 1.0
  */
 class Markdown extends \yii\helpers\Markdown 
-{	
+{
+
 	# SmartyPants does nothing at all
 	const  SMARTYPANTS_ATTR_DO_NOTHING             =  0;
 	# "--" for em-dashes; no en-dash support  
@@ -70,4 +71,5 @@ class Markdown extends \yii\helpers\Markdown
 		}
 		return strtr($content, $config);
 	}
+
 }
