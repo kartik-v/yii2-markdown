@@ -9,6 +9,7 @@ namespace kartik\markdown;
  * @since 1.0
  */
 class Module extends \yii\base\Module {
+
 	/**
 	 * @var string the namespace of the module's controller classes
 	 */
