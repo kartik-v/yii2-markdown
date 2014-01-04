@@ -37,10 +37,10 @@ function isNumber(n) {
 
 function genSaveFile(vCss, vHeader, vData, vType, vAlert, vUrl, vNullMsg) {
     alert(vAlert)
-	output = vHeader + vData
+    output = vHeader + vData
 
     if (vType == 'HTML') {
-         $.ajax({
+        $.ajax({
             type: "POST",
             url: vUrl,
             dataType: "json",
@@ -70,7 +70,7 @@ function togglePreview(params) {
             source = params.source,
             target = params.target,
             url = params.url,
-			progress = params.progress,
+            progress = params.progress,
             nullMsg = params.nullMsg;
 
     $(preview).toggleClass('active');
@@ -79,7 +79,7 @@ function togglePreview(params) {
         $(preview).removeAttr('disabled')
         $(source).addClass('hidden');
         $(target).removeClass('hidden');
-       $.ajax({
+        $.ajax({
             type: "POST",
             url: url,
             dataType: "json",
@@ -87,12 +87,12 @@ function togglePreview(params) {
                 source: $(source).val(),
                 nullMsg: nullMsg
             },
-			beforeSend: function() {
-				$(target).html(progress);
-			},
+            beforeSend: function() {
+                $(target).html(progress);
+            },
             success: function(data) {
                 if (data) {
-                   $(target).html(data);
+                    $(target).html(data);
                 } else {
                     alert('HTML preview failed! Try again later.'); //testing purpose
                 }
