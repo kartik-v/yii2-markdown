@@ -1,4 +1,4 @@
-/**
+/*!
  * ====================================================
  * kv-markdown.js
  * ====================================================
@@ -311,17 +311,21 @@ function toggleScreen(btn, container, editor, modal, preview, defHeight) {
     h = $(window).height();
     if ($(btn).hasClass('active')) {
         $(btn).removeClass('active')
+        val = $(modal + ' textarea').val()
         $(modal + ' textarea').height(defHeight);
         $(modal + ' ' + preview).css('max-height', defHeight);
         $(modal + ' ' + editor).clone(true).appendTo(container);
+        $(container + ' textarea').val(val)
         $(modal + ' ' + editor).remove();
         $('.kv-fullscreen').modal("hide");
     } else {
         $(btn).addClass('active')
+        val = $(container + ' textarea').val()
         $(container + ' ' + editor).clone(true).appendTo(modal)
         $(container + ' ' + editor).remove();
         $(modal + ' textarea').height(0.75 * h);
         $(modal + ' ' + preview).css('max-height', 0.75 * h);
+        $(modal + ' textarea').val(val)
         $('.kv-fullscreen').modal("show")
     }
 }
