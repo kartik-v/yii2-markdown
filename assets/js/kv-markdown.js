@@ -28,7 +28,7 @@ String.prototype.repeat = function(n) {
 
 function isEmpty(value, trim) {
     return value === null || value === undefined || value == []
-            || value === '' || trim && $.trim(value) === '';
+        || value === '' || trim && $.trim(value) === '';
 }
 
 function isNumber(n) {
@@ -66,12 +66,12 @@ function genSaveFile(vCss, vHeader, vData, vType, vAlert, vUrl, vNullMsg) {
 
 function togglePreview(params) {
     var editor = params.editor,
-            preview = params.preview,
-            source = params.source,
-            target = params.target,
-            url = params.url,
-            progress = params.progress,
-            nullMsg = params.nullMsg;
+        preview = params.preview,
+        source = params.source,
+        target = params.target,
+        url = params.url,
+        progress = params.progress,
+        nullMsg = params.nullMsg;
 
     $(preview).toggleClass('active');
     if ($(target).hasClass('hidden')) {
@@ -91,7 +91,7 @@ function togglePreview(params) {
                 $(target).html(progress);
             },
             success: function(data) {
-				$(target).html(data);
+                $(target).html(data);
             }
         });
         $(target).focus();
@@ -119,7 +119,7 @@ function disableButtons(editor) {
 
 function getMarkUp(txt, begin, end) {
     var m = begin.length,
-            n = end.length
+        n = end.length
     var str = txt
     if (m > 0) {
         str = (str.slice(0, m) == begin) ? str.slice(m) : begin + str
@@ -149,8 +149,8 @@ function markUp(btn, source) {
     var el = $(source)
     el.focus();
     var txt = el.extractSelectedText(),
-            len = txt.length,
-            str = txt
+        len = txt.length,
+        str = txt
 
     // Bold
     if (btn == 1) {
@@ -187,7 +187,7 @@ function markUp(btn, source) {
     // Add Indent
     else if (btn == 7) {
         var str = txt,
-                ind = '  '
+            ind = '  '
         if (str.indexOf('\n') < 0) {
             str = ind + str
         } else {
@@ -202,7 +202,7 @@ function markUp(btn, source) {
     // Remove Indent
     else if (btn == 8) {
         var str = txt,
-                ind = '  '
+            ind = '  '
         if (str.indexOf('\n') < 0 && str.substr(0, 2) == ind) {
             str = str.slice(2)
         } else {
@@ -232,7 +232,7 @@ function markUp(btn, source) {
                 str = getMarkUp(txt, start + '. ', '');
             } else {
                 var list = [],
-                        i = start
+                    i = start
                 list = txt.split('\n')
                 $.each(list, function(k, v) {
                     list[k] = getMarkUp(v, i + '. ', '')
@@ -246,7 +246,7 @@ function markUp(btn, source) {
     else if (btn == 11) {
         if (txt.indexOf('\n') > 0) {
             var list = [],
-                    i = 1
+                i = 1
             list = txt.split('\n')
             $.each(list, function(k, v) {
                 tag = (i % 2 == 0) ? ':    ' : '';
@@ -267,7 +267,7 @@ function markUp(btn, source) {
             str = getMarkUp(txt, '', title + '[^1]') + "\n" + notes;
         } else {
             var list = [],
-                    i = 1
+                i = 1
             list = txt.split('\n')
             $.each(list, function(k, v) {
                 id = '[^' + i + ']'
@@ -328,15 +328,15 @@ function toggleScreen(btn, container, editor, modal, preview, defHeight) {
 
 function initEditor(params) {
     var input = params.source,
-            editor = params.editor,
-            preview = params.preview,
-            target = params.target,
-            maximize = params.maximize,
-            container = params.container,
-            modal = editor.slice(1) + '-modal',
-            save1 = params.save1,
-            save2 = params.save2,
-            defHeight = params.height
+        editor = params.editor,
+        preview = params.preview,
+        target = params.target,
+        maximize = params.maximize,
+        container = params.container,
+        modal = editor.slice(1) + '-modal',
+        save1 = params.save1,
+        save2 = params.save2,
+        defHeight = params.height
 
     $(input).focus(function() {
         $(editor).addClass('active');
