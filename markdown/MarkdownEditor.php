@@ -217,6 +217,16 @@ EOT;
     public $saveCss;
 
     /**
+     * @var boolean show the save button - defaults to true
+     */
+    public $showSave = true;
+
+    /**
+     * @var boolean show the preview button - defaults to true
+     */
+    public $showPreview = true;
+
+    /**
      * @var Module
      */
     private $_module;
@@ -449,12 +459,12 @@ EOT;
             $this->emptyPreview = '<p class="help-block text-center">' . Yii::t('app', 'No content to display') . '</p>';
         }
         if (!isset($this->saveTextAlert)) {
-            $this->saveTextAlert = Yii::t('app', 'Your "text file" will be generated. Save the file to your client ' .
+            $this->saveTextAlert = Yii::t('app', 'Your Text file will be generated. Save the file to your client ' .
                             "with .txt extension in the accompanying dialog.\n\n" .
                             "Disable any popup blockers in your browser to ensure proper download.");
         }
         if (!isset($this->saveHtmlAlert)) {
-            $this->saveHtmlAlert = Yii::t('app', 'Your "html file" will be generated. Save the file to your client ' .
+            $this->saveHtmlAlert = Yii::t('app', 'Your HTML file will be generated. Save the file to your client ' .
                             "with .htm/.html extension in the accompanying dialog.\n\n" .
                             "Disable any popup blockers in your browser to ensure proper download.");
         }
@@ -482,10 +492,10 @@ EOT;
         $bullet = '<i class="glyphicon glyphicon-arrow-right"></i>';
         $link1 = '<a href="http://michelf.ca/projects/php-markdown/extra/" target="_blank">' . Yii::t('app', 'PHP Markdown Extra') . '</a>';
         $link2 = '<a href="http://michelf.ca/projects/php-smartypants/" target="_blank">' . Yii::t('app', 'PHP SmartyPants') . '</a>';
-        $msg1 = Yii::t('app', '{bullet} You may use {link1} and {link2} syntax.', [
+        $link = $this->_module->smartyPants ? $link1 . ' and ' . $link2 : $link1;
+        $msg1 = Yii::t('app', '{bullet} You may use {link} syntax.', [
                     'bullet' => $bullet,
-                    'link1' => $link1,
-                    'link2' => $link2
+                    'link' => $link
         ]);
         $msg2 = Yii::t('app', '{bullet}  To undo / redo, press CTRL-Z / CTRL-Y. You can also undo most button actions by clicking it again.', [
                     'bullet' => $bullet,
@@ -543,6 +553,12 @@ EOT;
      * Render the editor footer content
      */
     public function renderFooter() {
+        if (!$this->showSave) {
+            unset($this->_defaultFooter[0]);
+        }
+        if (!$this->showPreview) {
+            unset($this->_defaultFooter[1]);
+        }
         $toolbar = array_replace($this->_defaultFooter, $this->footerButtons);
         $buttons = '';
 
