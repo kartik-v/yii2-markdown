@@ -94,7 +94,7 @@ function togglePreview(params) {
                 if (data) {
                     $(target).html(data);
                 } else {
-                    alert('HTML preview failed! Try again later.'); //testing purpose
+                    $(target).html(nullMsg);
                 }
             }
         });
