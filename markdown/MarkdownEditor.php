@@ -449,12 +449,12 @@ EOT;
             $this->emptyPreview = '<p class="help-block text-center">' . Yii::t('app', 'No content to display') . '</p>';
         }
         if (!isset($this->saveTextAlert)) {
-            $this->saveTextAlert = Yii::t('app', 'Your Text file will be generated. Save the file to your client ' .
+            $this->saveTextAlert = Yii::t('app', 'Your "text file" will be generated. Save the file to your client ' .
                             "with .txt extension in the accompanying dialog.\n\n" .
                             "Disable any popup blockers in your browser to ensure proper download.");
         }
         if (!isset($this->saveHtmlAlert)) {
-            $this->saveHtmlAlert = Yii::t('app', 'Your HTML file will be generated. Save the file to your client ' .
+            $this->saveHtmlAlert = Yii::t('app', 'Your "html file" will be generated. Save the file to your client ' .
                             "with .htm/.html extension in the accompanying dialog.\n\n" .
                             "Disable any popup blockers in your browser to ensure proper download.");
         }
