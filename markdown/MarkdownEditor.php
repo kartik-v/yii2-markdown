@@ -415,9 +415,9 @@ EOT;
         if (strlen(trim($label)) > 0) {
             $icon .= ' ';
         }
-        $label = $icon . ($encodeLabel ? Yii::t('app', Html::encode($label)) : $label);
+        $label = $icon . ($encodeLabel ? Yii::t('markdown', Html::encode($label)) : $label);
         $options = array_replace($this->buttonOptions, $options);
-        $options['title'] = empty($options['title']) ? '' : Yii::t('app', $options['title']);
+        $options['title'] = empty($options['title']) ? '' : Yii::t('markdown', $options['title']);
         $options['id'] = $this->getButtonId($btn);
         $items = ArrayHelper::remove($options, 'items', []);
 
@@ -456,22 +456,24 @@ EOT;
             $this->footerMessage = $this->getFooterMessage();
         }
         if (!isset($this->emptyPreview)) {
-            $this->emptyPreview = '<p class="help-block text-center">' . Yii::t('app', 'No content to display') . '</p>';
+            $this->emptyPreview = '<p class="help-block text-center">' . Yii::t('markdown', 'No content to display') . '</p>';
         }
         if (!isset($this->saveTextAlert)) {
-            $this->saveTextAlert = Yii::t('app', 'Your Text file will be generated. Save the file to your client ' .
+            $this->saveTextAlert = Yii::t('markdown', 'Your TEXT file will be generated. Save the file to your client ' .
                             "with .txt extension in the accompanying dialog.\n\n" .
                             "Disable any popup blockers in your browser to ensure proper download.");
         }
         if (!isset($this->saveHtmlAlert)) {
-            $this->saveHtmlAlert = Yii::t('app', 'Your HTML file will be generated. Save the file to your client ' .
+            $this->saveHtmlAlert = Yii::t('markdown', 'Your HTML file will be generated. Save the file to your client ' .
                             "with .htm/.html extension in the accompanying dialog.\n\n" .
                             "Disable any popup blockers in your browser to ensure proper download.");
         }
         if (!isset($this->saveHeader)) {
-            $this->saveHeader = Yii::t('app', "> - - -\n> Markdown Export\n> ===============\n> *Generated " .
-                            date("d-M-Y H:i") .
-                            " by \\kartik\\markdown\\MarkdownEditor*\n> - - -\n\n");
+            $this->saveHeader = "> - - -\n> " . Yii::t('markdown', "Markdown Export{line} *Generated {date} by {class}", [
+                        'line' => "\n> ===============\n>",
+                        'date' => date("d-M-Y H:i"),
+                        'class' => "\\kartik\\markdown\\MarkdownEditor*\n> - - -\n\n"
+            ]);
         }
         if (!isset($this->saveCss)) {
             $this->saveCss = Html::cssFile('http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css') .
@@ -481,7 +483,7 @@ EOT;
                             'th[align="center"]{text-align:center!important;}');
         }
         if (!isset($this->previewProgress)) {
-            $this->previewProgress = '<div class="kv-loading">' . Yii::t('app', 'Loading Preview ') . '&hellip;</div>';
+            $this->previewProgress = '<div class="kv-loading">' . Yii::t('markdown', 'Loading Preview ') . '&hellip;</div>';
         }
     }
 
@@ -490,14 +492,14 @@ EOT;
      */
     protected function getFooterMessage() {
         $bullet = '<i class="glyphicon glyphicon-arrow-right"></i>';
-        $link1 = '<a href="http://michelf.ca/projects/php-markdown/extra/" target="_blank">' . Yii::t('app', 'PHP Markdown Extra') . '</a>';
-        $link2 = '<a href="http://michelf.ca/projects/php-smartypants/" target="_blank">' . Yii::t('app', 'PHP SmartyPants') . '</a>';
+        $link1 = '<a href="http://michelf.ca/projects/php-markdown/extra/" target="_blank">' . Yii::t('markdown', 'PHP Markdown Extra') . '</a>';
+        $link2 = '<a href="http://michelf.ca/projects/php-smartypants/" target="_blank">' . Yii::t('markdown', 'PHP SmartyPants') . '</a>';
         $link = $this->_module->smartyPants ? $link1 . ' and ' . $link2 : $link1;
-        $msg1 = Yii::t('app', '{bullet} You may use {link} syntax.', [
+        $msg1 = Yii::t('markdown', '{bullet} You may use {link} syntax.', [
                     'bullet' => $bullet,
                     'link' => $link
         ]);
-        $msg2 = Yii::t('app', '{bullet}  To undo / redo, press CTRL-Z / CTRL-Y. You can also undo most button actions by clicking it again.', [
+        $msg2 = Yii::t('markdown', '{bullet} To undo / redo, press CTRL-Z / CTRL-Y. You can also undo most button actions by clicking it again.', [
                     'bullet' => $bullet,
         ]);
         return $msg1 . '<br>' . $msg2;
@@ -521,7 +523,7 @@ EOT;
             'url' => Yii::$app->controller->createUrl($this->_module->previewAction),
             'save1' => '#' . $this->getButtonId(self::BTN_SAVE_1),
             'save2' => '#' . $this->getButtonId(self::BTN_SAVE_2),
-            'nullMsg' => Yii::t('app', $this->emptyPreview),
+            'nullMsg' => Yii::t('markdown', $this->emptyPreview),
             'height' => $this->height,
             'saveText' => $this->saveTextAlert,
             'saveHtml' => $this->saveHtmlAlert,
