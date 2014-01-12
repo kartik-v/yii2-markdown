@@ -398,6 +398,7 @@ EOT;
         $icon = ArrayHelper::remove($options, 'icon', '');
         $label = ArrayHelper::remove($options, 'label', '');
         $encodeLabel = ArrayHelper::remove($options, 'encodeLabel', $this->encodeLabels);
+		$options['type'] = 'button';
         if (strlen(trim($icon)) > 0) {
             $icon = "<i class='glyphicon glyphicon-{$icon}'></i>";
         }
