@@ -9,6 +9,7 @@
 namespace kartik\markdown\controllers;
 
 use Yii;
+use yii\helpers\HtmlPurifier;
 use yii\helpers\Json;
 use kartik\markdown\Markdown;
 
@@ -22,7 +23,7 @@ class ParseController extends \yii\web\Controller {
         $output = '';
         $module = Yii::$app->controller->module;
         if (isset($_POST['source'])) {
-            $output = (strlen($_POST['source']) > 0) ? Markdown::convert($_POST['source'], ['custom' => $module->customConversion]) : $_POST['nullMsg'];
+            $output = (strlen($_POST['source']) > 0) ? HtmlPurifier::process(Markdown::convert($_POST['source'], ['custom' => $module->customConversion])) : $_POST['nullMsg'];
         }
         echo Json::encode($output);
     }
