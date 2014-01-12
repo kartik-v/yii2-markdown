@@ -91,7 +91,7 @@ function togglePreview(params) {
                 $(target).html(progress);
             },
             success: function(data) {
-                $(target).html(data);
+				$(target).html(data);
             }
         });
         $(target).focus();
@@ -177,12 +177,12 @@ function markUp(btn, source) {
     // Hyperlink
     else if (btn == 5) {
         link = prompt('Insert Hyperlink', 'http://')
-        str = (link != null && link != '' && link != 'http://') ? '[' + txt + '] (' + link + ')' : txt
+        str = (link != null && link != '' && link != 'http://') ? '[' + txt + '](' + link + ')' : txt
     }
     // Image
     else if (btn == 6) {
         link = prompt('Insert Image Hyperlink', 'http://')
-        str = (link != null && link != '' && link != 'http://') ? '![' + txt + '] (' + link + ' "enter image title here")' : txt
+        str = (link != null && link != '' && link != 'http://') ? '![' + txt + '](' + link + ' "enter image title here")' : txt
     }
     // Add Indent
     else if (btn == 7) {
