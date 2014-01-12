@@ -8,6 +8,8 @@
 
 namespace kartik\markdown;
 
+use Yii;
+
 /**
  * A Markdown conversion and editing module for Yii Framework 2.0
  *
@@ -15,11 +17,6 @@ namespace kartik\markdown;
  * @since 1.0
  */
 class Module extends \yii\base\Module {
-
-    /**
-     * @var string the namespace of the module's controller classes
-     */
-    public $controllerNamespace = 'kartik\markdown\controllers';
 
     /**
      * @var string the controller action route used
@@ -42,9 +39,23 @@ class Module extends \yii\base\Module {
      */
     public $smartyPants = true;
 
+    /**
+     * @var array the the internalization configuration for
+     * this module
+     */
+    public $i18n = [];
+
     public function init() {
         parent::init();
-        // custom initialization code goes here
+        Yii::setAlias('@markdown', dirname(__FILE__));
+        if (empty($this->i18n)) {
+            $this->i18n = [
+                'class' => 'yii\i18n\PhpMessageSource',
+                'sourceLanguage' => 'en-US',
+                'basePath' => '@markdown/messages'
+            ];
+        }
+        Yii::$app->i18n->translations['markdown'] = $this->i18n;
     }
 
 }
