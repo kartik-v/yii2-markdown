@@ -91,11 +91,7 @@ function togglePreview(params) {
                 $(target).html(progress);
             },
             success: function(data) {
-                if (data) {
-                    $(target).html(data);
-                } else {
-                    $(target).html(nullMsg);
-                }
+                $(target).html(data);
             }
         });
         $(target).focus();
