@@ -55,7 +55,6 @@ class Module extends \yii\base\Module {
                 'forceTranslation' => true
             ];
         }
-        Yii::$app->language = 'de';
         Yii::$app->i18n->translations['markdown'] = $this->i18n;
     }
 
