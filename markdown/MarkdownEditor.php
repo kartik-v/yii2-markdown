@@ -91,7 +91,7 @@ EOT;
      * 		    - options: HTML attributes for each button. If not set will use the global [[buttonOptions]]
      * - options: HTML attributes for the button group
      *
-     * @see [[_defaultToolbar]]
+     * @see function [[setDefaultToolbar()]]
      */
     public $toolbar = [];
 
@@ -155,7 +155,7 @@ EOT;
     /**
      * @var string the template to display the footer. The following
      * special variables will be replaced:
-     * - {buttons}: array the configuration for footer toolbar buttons (see [[_defaultFooter]])
+     * - {buttons}: array the configuration for footer toolbar buttons (see function [[setDefaultFooter()]])
      * - {message}: array the footer help message displayed (see [[footerMessage]])
      */
     public $footer = '<div class = "btn-toolbar pull-right">{buttons}</div><div class="kv-md-hint">{message}</div><div class="clearfix"></div>';
@@ -175,7 +175,7 @@ EOT;
      * 		    - options: HTML attributes for each button. If not set will use the global [[buttonOptions]]
      * - options: HTML attributes for the button group
      *
-     * @see [[_defaultFooter]]
+     * @see function [[setDefaultFooter()]]
      */
     public $footerButtons = [];
 
@@ -230,89 +230,6 @@ EOT;
      * @var Module
      */
     private $_module;
-
-    /**
-     * @var array default header toolbar configuration
-     */
-    private $_defaultToolbar = [
-        [
-            'buttons' => [
-                self::BTN_BOLD => ['icon' => 'bold', 'title' => 'Bold'],
-                self::BTN_ITALIC => ['icon' => 'italic', 'title' => 'Italic'],
-                self::BTN_PARAGRAPH => ['icon' => 'font', 'title' => 'Paragraph'],
-                self::BTN_NEW_LINE => ['icon' => 'text-height', 'title' => 'Append Line Break'],
-                self::BTN_HEADING => ['icon' => 'header', 'title' => 'Heading', 'items' => [
-                        self::BTN_H1 => ['label' => 'Heading 1', 'options' => ['class' => 'kv-heading-1', 'title' => 'Heading 1 Style']],
-                        self::BTN_H2 => ['label' => 'Heading 2', 'options' => ['class' => 'kv-heading-2', 'title' => 'Heading 2 Style']],
-                        self::BTN_H3 => ['label' => 'Heading 3', 'options' => ['class' => 'kv-heading-3', 'title' => 'Heading 3 Style']],
-                        self::BTN_H4 => ['label' => 'Heading 4', 'options' => ['class' => 'kv-heading-4', 'title' => 'Heading 4 Style']],
-                        self::BTN_H5 => ['label' => 'Heading 5', 'options' => ['class' => 'kv-heading-5', 'title' => 'Heading 5 Style']],
-                        self::BTN_H6 => ['label' => 'Heading 6', 'options' => ['class' => 'kv-heading-6', 'title' => 'Heading 6 Style']],
-                    ]],
-            ],
-        ],
-        [
-            'buttons' => [
-                self::BTN_LINK => ['icon' => 'link', 'title' => 'URL/Link'],
-                self::BTN_IMAGE => ['icon' => 'picture', 'title' => 'Image'],
-            ],
-        ],
-        [
-            'buttons' => [
-                self::BTN_INDENT_L => ['icon' => 'indent-left', 'title' => 'Indent Text'],
-                self::BTN_INDENT_R => ['icon' => 'indent-right', 'title' => 'Unindent Text'],
-            ],
-        ],
-        [
-            'buttons' => [
-                self::BTN_UL => ['icon' => 'list', 'title' => 'Bulleted List'],
-                self::BTN_OL => ['icon' => 'list-alt', 'title' => 'Numbered List'],
-                self::BTN_DL => ['icon' => 'th-list', 'title' => 'Definition List'],
-            ],
-        ],
-        [
-            'buttons' => [
-                self::BTN_FOOTNOTE => ['icon' => 'edit', 'title' => 'Footnote'],
-                self::BTN_QUOTE => ['icon' => 'comment', 'title' => 'Block Quote'],
-            ],
-        ],
-        [
-            'buttons' => [
-                self::BTN_CODE => ['label' => self::ICON_CODE, 'title' => 'Inline Code', 'encodeLabel' => false],
-                self::BTN_CODE_BLOCK => ['icon' => 'sound-stereo', 'title' => 'Code Block'],
-            ],
-        ],
-        [
-            'buttons' => [
-                self::BTN_HR => ['label' => self::ICON_HR, 'title' => 'Horizontal Line', 'encodeLabel' => false],
-            ],
-        ],
-        [
-            'buttons' => [
-                self::BTN_MAXIMIZE => ['icon' => 'fullscreen', 'title' => 'Toggle full screen', 'data-enabled' => true]
-            ],
-            'options' => ['class' => 'pull-right']
-        ],
-    ];
-
-    /**
-     * @var array default footer toolbar configuration
-     */
-    private $_defaultFooter = [
-        [
-            'buttons' => [
-                self::BTN_SAVE => ['icon' => 'floppy-disk', 'label' => 'Save', 'title' => 'Save content', 'class' => 'btn btn-sm btn-primary', 'data-enabled' => true, 'items' => [
-                        self::BTN_SAVE_1 => ['icon' => 'floppy-save', 'label' => 'Text', 'options' => ['title' => 'Save as text']],
-                        self::BTN_SAVE_2 => ['icon' => 'floppy-saved', 'label' => 'HTML', 'options' => ['title' => 'Save as HTML']],
-                    ]],
-            ]
-        ],
-        [
-            'buttons' => [
-                self::BTN_PREVIEW => ['icon' => 'search', 'label' => 'Preview', 'title' => 'Preview formatted text'],
-            ]
-        ],
-    ];
 
     /**
      * Initialize the widget
@@ -415,9 +332,9 @@ EOT;
         if (strlen(trim($label)) > 0) {
             $icon .= ' ';
         }
-        $label = $icon . ($encodeLabel ? Yii::t('markdown', Html::encode($label)) : $label);
+        $label = $icon . ($encodeLabel ? Html::encode($label) : $label);
         $options = array_replace($this->buttonOptions, $options);
-        $options['title'] = empty($options['title']) ? '' : Yii::t('markdown', $options['title']);
+        $options['title'] = empty($options['title']) ? '' : $options['title'];
         $options['id'] = $this->getButtonId($btn);
         $items = ArrayHelper::remove($options, 'items', []);
 
@@ -458,15 +375,19 @@ EOT;
         if (!isset($this->emptyPreview)) {
             $this->emptyPreview = '<p class="help-block text-center">' . Yii::t('markdown', 'No content to display') . '</p>';
         }
+        $saveAlert = 'Your {type} file will be generated. Save the file to your client with {ext} extension in the accompanying dialog.';
+        $popupAlert = Yii::t('markdown', 'Disable any popup blockers in your browser to ensure proper download.');
         if (!isset($this->saveTextAlert)) {
-            $this->saveTextAlert = Yii::t('markdown', 'Your TEXT file will be generated. Save the file to your client ' .
-                            "with .txt extension in the accompanying dialog.\n\n" .
-                            "Disable any popup blockers in your browser to ensure proper download.");
+            $this->saveTextAlert = Yii::t('markdown', $saveAlert, [
+                        'type' => Yii::t('markdown', 'TEXT'),
+                        'ext' => '.txt',
+                    ]) . "\n\n" . $popupAlert;
         }
         if (!isset($this->saveHtmlAlert)) {
-            $this->saveHtmlAlert = Yii::t('markdown', 'Your HTML file will be generated. Save the file to your client ' .
-                            "with .htm/.html extension in the accompanying dialog.\n\n" .
-                            "Disable any popup blockers in your browser to ensure proper download.");
+            $this->saveHtmlAlert = Yii::t('markdown', $saveAlert, [
+                        'type' => Yii::t('markdown', 'HTML'),
+                        'ext' => '.txt',
+                    ]) . "\n\n" . $popupAlert;
         }
         if (!isset($this->saveHeader)) {
             $this->saveHeader = "> - - -\n> " . Yii::t('markdown', "Markdown Export{line} *Generated {date} by {class}", [
@@ -483,7 +404,7 @@ EOT;
                             'th[align="center"]{text-align:center!important;}');
         }
         if (!isset($this->previewProgress)) {
-            $this->previewProgress = '<div class="kv-loading">' . Yii::t('markdown', 'Loading Preview ') . '&hellip;</div>';
+            $this->previewProgress = '<div class="kv-loading">' . Yii::t('markdown', 'Loading Preview') . ' &hellip;</div>';
         }
     }
 
@@ -536,13 +457,124 @@ EOT;
     }
 
     /**
+     * Setup default header toolbar
+     */
+    protected function setDefaultHeader() {
+        if (!empty($this->toolbar)) {
+            return;
+        }
+
+        $heading = function($n) {
+            return [
+                'label' => Yii::t('markdown', 'Heading {n}', ['n' => $n]),
+                'options' => [
+                    'class' => 'kv-heading-' . $n,
+                    'title' => Yii::t('markdown', 'Heading {n} Style', ['n' => $n])
+                ]
+            ];
+        };
+
+        $this->toolbar = [
+            [
+                'buttons' => [
+                    self::BTN_BOLD => ['icon' => 'bold', 'title' => Yii::t('markdown', 'Bold')],
+                    self::BTN_ITALIC => ['icon' => 'italic', 'title' => Yii::t('markdown', 'Italic')],
+                    self::BTN_PARAGRAPH => ['icon' => 'font', 'title' => Yii::t('markdown', 'Paragraph')],
+                    self::BTN_NEW_LINE => ['icon' => 'text-height', 'title' => Yii::t('markdown', 'Append Line Break')],
+                    self::BTN_HEADING => ['icon' => 'header', 'title' => Yii::t('markdown', 'Heading'), 'items' => [
+                            self::BTN_H1 => $heading(1),
+                            self::BTN_H2 => $heading(2),
+                            self::BTN_H3 => $heading(3),
+                            self::BTN_H4 => $heading(4),
+                            self::BTN_H5 => $heading(5),
+                            self::BTN_H6 => $heading(6),
+                        ]],
+                ],
+            ],
+            [
+                'buttons' => [
+                    self::BTN_LINK => ['icon' => 'link', 'title' => Yii::t('markdown', 'URL/Link')],
+                    self::BTN_IMAGE => ['icon' => 'picture', 'title' => Yii::t('markdown', 'Image')],
+                ],
+            ],
+            [
+                'buttons' => [
+                    self::BTN_INDENT_L => ['icon' => 'indent-left', 'title' => Yii::t('markdown', 'Indent Text')],
+                    self::BTN_INDENT_R => ['icon' => 'indent-right', 'title' => Yii::t('markdown', 'Unindent Text')],
+                ],
+            ],
+            [
+                'buttons' => [
+                    self::BTN_UL => ['icon' => 'list', 'title' => Yii::t('markdown', 'Bulleted List')],
+                    self::BTN_OL => ['icon' => 'list-alt', 'title' => Yii::t('markdown', 'Numbered List')],
+                    self::BTN_DL => ['icon' => 'th-list', 'title' => Yii::t('markdown', 'Definition List')],
+                ],
+            ],
+            [
+                'buttons' => [
+                    self::BTN_FOOTNOTE => ['icon' => 'edit', 'title' => Yii::t('markdown', 'Footnote')],
+                    self::BTN_QUOTE => ['icon' => 'comment', 'title' => Yii::t('markdown', 'Block Quote')],
+                ],
+            ],
+            [
+                'buttons' => [
+                    self::BTN_CODE => ['label' => self::ICON_CODE, 'title' => Yii::t('markdown', 'Inline Code'), 'encodeLabel' => false],
+                    self::BTN_CODE_BLOCK => ['icon' => 'sound-stereo', 'title' => Yii::t('markdown', 'Code Block')],
+                ],
+            ],
+            [
+                'buttons' => [
+                    self::BTN_HR => ['label' => self::ICON_HR, 'title' => Yii::t('markdown', 'Horizontal Line'), 'encodeLabel' => false],
+                ],
+            ],
+            [
+                'buttons' => [
+                    self::BTN_MAXIMIZE => ['icon' => 'fullscreen', 'title' => Yii::t('markdown', 'Toggle full screen'), 'data-enabled' => true]
+                ],
+                'options' => ['class' => 'pull-right']
+            ],
+        ];
+    }
+
+    /**
+     * Setup default footer toolbar
+     */
+    protected function setDefaultFooter() {
+        if (!empty($this->footerButtons)) {
+            return;
+        }
+
+        $this->footerButtons = [
+            [
+                'buttons' => [
+                    self::BTN_SAVE => ['icon' => 'floppy-disk', 'label' => Yii::t('markdown', 'Save'), 'title' => Yii::t('markdown', 'Save content'), 'class' => 'btn btn-sm btn-primary', 'data-enabled' => true, 'items' => [
+                            self::BTN_SAVE_1 => ['icon' => 'floppy-save', 'label' => Yii::t('markdown', 'Text'), 'options' => ['title' => Yii::t('markdown', 'Save as text')]],
+                            self::BTN_SAVE_2 => ['icon' => 'floppy-saved', 'label' => Yii::t('markdown', 'HTML'), 'options' => ['title' => Yii::t('markdown', 'Save as HTML')]],
+                        ]],
+                ]
+            ],
+            [
+                'buttons' => [
+                    self::BTN_PREVIEW => ['icon' => 'search', 'label' => Yii::t('markdown', 'Preview'), 'title' => Yii::t('markdown', 'Preview formatted text')],
+                ]
+            ],
+        ];
+
+        if (!$this->showSave) {
+            unset($this->footer[0]);
+        }
+        if (!$this->showPreview) {
+            unset($this->footer[1]);
+        }
+    }
+
+    /**
      * Render the editor header content
      */
     protected function renderHeader() {
-        $toolbar = array_replace($this->_defaultToolbar, $this->toolbar);
         $output = '';
-
-        foreach ($toolbar as $group) {
+        $this->setDefaultHeader();
+        foreach ($this->toolbar as $group) {
             if (empty($group['buttons'])) {
                 continue;
             }
@@ -555,16 +587,9 @@ EOT;
      * Render the editor footer content
      */
     public function renderFooter() {
-        if (!$this->showSave) {
-            unset($this->_defaultFooter[0]);
-        }
-        if (!$this->showPreview) {
-            unset($this->_defaultFooter[1]);
-        }
-        $toolbar = array_replace($this->_defaultFooter, $this->footerButtons);
         $buttons = '';
-
-        foreach ($toolbar as $group) {
+        $this->setDefaultFooter();
+        foreach ($this->footerButtons as $group) {
             if (empty($group['buttons'])) {
                 continue;
             }

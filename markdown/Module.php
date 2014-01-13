@@ -51,10 +51,11 @@ class Module extends \yii\base\Module {
         if (empty($this->i18n)) {
             $this->i18n = [
                 'class' => 'yii\i18n\PhpMessageSource',
-                'sourceLanguage' => 'en-US',
-                'basePath' => '@markdown/messages'
+                'basePath' => '@markdown/messages',
+                'forceTranslation' => true
             ];
         }
+        Yii::$app->language = 'de';
         Yii::$app->i18n->translations['markdown'] = $this->i18n;
     }
 
