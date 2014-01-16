@@ -561,10 +561,10 @@ EOT;
         ];
 
         if (!$this->showSave) {
-            unset($this->footer[0]);
+            unset($this->footerButtons[0]);
         }
         if (!$this->showPreview) {
-            unset($this->footer[1]);
+            unset($this->footerButtons[1]);
         }
     }
 
