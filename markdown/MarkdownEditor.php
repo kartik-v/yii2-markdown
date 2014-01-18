@@ -60,9 +60,9 @@ class MarkdownEditor extends \yii\widgets\InputWidget {
      * Footer toolbar button constants
      */
     const BTN_PREVIEW = 50;
-    const BTN_SAVE = 51;
-    const BTN_SAVE_1 = 52;
-    const BTN_SAVE_2 = 53;
+    const BTN_EXPORT = 51;
+    const BTN_EXPORT_1 = 52;
+    const BTN_EXPORT_2 = 53;
 
     /**
      * Custom icons to compensate for unavailable Bootstrap glyphicons
@@ -198,28 +198,28 @@ EOT;
     /**
      * @var string alert message displayed before saving output as Text
      */
-    public $saveTextAlert;
+    public $exportTextAlert;
 
     /**
      * @var string alert message displayed before saving output as HTML
      */
-    public $saveHtmlAlert;
+    public $exportHtmlAlert;
 
     /**
      * @var string the header message appended at the beginning of the 
-     * saved converted output
+     * exportd converted output
      */
-    public $saveHeader;
+    public $exportHeader;
 
     /**
-     * @var string the CSS applied to the saved converted output
+     * @var string the CSS applied to the exported converted output
      */
-    public $saveCss;
+    public $exportCss;
 
     /**
-     * @var boolean show the save button - defaults to true
+     * @var boolean show the export button - defaults to true
      */
-    public $showSave = true;
+    public $showExport = true;
 
     /**
      * @var boolean show the preview button - defaults to true
@@ -353,7 +353,7 @@ EOT;
         if (!empty($items)) {
             $output .= "<ul class='dropdown-menu'>\n";
             foreach ($items as $key => $item) {
-                if ($btn !== self::BTN_SAVE) {
+                if ($btn !== self::BTN_EXPORT) {
                     $item['options']['onclick'] = 'markUp(' . $key . ', "#' . $this->inputOptions['id'] . '")';
                 }
                 $item['options']['id'] = $this->getButtonId($key);
@@ -375,29 +375,29 @@ EOT;
         if (!isset($this->emptyPreview)) {
             $this->emptyPreview = '<p class="help-block text-center">' . Yii::t('markdown', 'No content to display') . '</p>';
         }
-        $saveAlert = 'Your {type} file will be generated. Save the file to your client with {ext} extension in the accompanying dialog.';
+        $exportAlert = 'Your {type} file will be generated. Save the file to your client with {ext} extension in the accompanying dialog.';
         $popupAlert = Yii::t('markdown', 'Disable any popup blockers in your browser to ensure proper download.');
-        if (!isset($this->saveTextAlert)) {
-            $this->saveTextAlert = Yii::t('markdown', $saveAlert, [
+        if (!isset($this->exportTextAlert)) {
+            $this->exportTextAlert = Yii::t('markdown', $exportAlert, [
                         'type' => Yii::t('markdown', 'TEXT'),
                         'ext' => '.txt',
                     ]) . "\n\n" . $popupAlert;
         }
-        if (!isset($this->saveHtmlAlert)) {
-            $this->saveHtmlAlert = Yii::t('markdown', $saveAlert, [
+        if (!isset($this->exportHtmlAlert)) {
+            $this->exportHtmlAlert = Yii::t('markdown', $exportAlert, [
                         'type' => Yii::t('markdown', 'HTML'),
                         'ext' => '.txt',
                     ]) . "\n\n" . $popupAlert;
         }
-        if (!isset($this->saveHeader)) {
-            $this->saveHeader = "> - - -\n> " . Yii::t('markdown', "Markdown Export{line} *Generated {date} by {class}", [
+        if (!isset($this->exportHeader)) {
+            $this->exportHeader = "> - - -\n> " . Yii::t('markdown', "Markdown Export{line} *Generated {date} by {class}", [
                         'line' => "\n> ===============\n>",
                         'date' => date("d-M-Y H:i"),
                         'class' => "\\kartik\\markdown\\MarkdownEditor*\n> - - -\n\n"
             ]);
         }
-        if (!isset($this->saveCss)) {
-            $this->saveCss = Html::cssFile('http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css') .
+        if (!isset($this->exportCss)) {
+            $this->exportCss = Html::cssFile('http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css') .
                     "\n" .
                     Html::style('body{margin:20px;padding:20px;border:1px solid #ddd;border-radius:5px;}' .
                             'th[align="right"]{text-align:right!important;}' .
@@ -442,14 +442,14 @@ EOT;
             'progress' => $this->previewProgress,
             'maximize' => '#' . $this->getButtonId(self::BTN_MAXIMIZE),
             'url' => Yii::$app->controller->createUrl($this->_module->previewAction),
-            'save1' => '#' . $this->getButtonId(self::BTN_SAVE_1),
-            'save2' => '#' . $this->getButtonId(self::BTN_SAVE_2),
+            'export1' => '#' . $this->getButtonId(self::BTN_EXPORT_1),
+            'export2' => '#' . $this->getButtonId(self::BTN_EXPORT_2),
             'nullMsg' => Yii::t('markdown', $this->emptyPreview),
             'height' => $this->height,
-            'saveText' => $this->saveTextAlert,
-            'saveHtml' => $this->saveHtmlAlert,
-            'saveHeader' => $this->saveHeader,
-            'saveCss' => $this->saveCss
+            'exportText' => $this->exportTextAlert,
+            'exportHtml' => $this->exportHtmlAlert,
+            'exportHeader' => $this->exportHeader,
+            'exportCss' => $this->exportCss
         ];
 
         $js = 'initEditor(' . Json::encode($params) . ')';
@@ -547,9 +547,9 @@ EOT;
         $this->footerButtons = [
             [
                 'buttons' => [
-                    self::BTN_SAVE => ['icon' => 'floppy-disk', 'label' => Yii::t('markdown', 'Save'), 'title' => Yii::t('markdown', 'Save content'), 'class' => 'btn btn-sm btn-primary', 'data-enabled' => true, 'items' => [
-                            self::BTN_SAVE_1 => ['icon' => 'floppy-save', 'label' => Yii::t('markdown', 'Text'), 'options' => ['title' => Yii::t('markdown', 'Save as text')]],
-                            self::BTN_SAVE_2 => ['icon' => 'floppy-saved', 'label' => Yii::t('markdown', 'HTML'), 'options' => ['title' => Yii::t('markdown', 'Save as HTML')]],
+                    self::BTN_EXPORT => ['icon' => 'floppy-disk', 'label' => Yii::t('markdown', 'Export'), 'title' => Yii::t('markdown', 'Export content'), 'class' => 'btn btn-sm btn-primary', 'data-enabled' => true, 'items' => [
+                            self::BTN_EXPORT_1 => ['icon' => 'floppy-save', 'label' => Yii::t('markdown', 'Text'), 'options' => ['title' => Yii::t('markdown', 'Save as text')]],
+                            self::BTN_EXPORT_2 => ['icon' => 'floppy-saved', 'label' => Yii::t('markdown', 'HTML'), 'options' => ['title' => Yii::t('markdown', 'Save as HTML')]],
                         ]],
                 ]
             ],
@@ -560,7 +560,7 @@ EOT;
             ],
         ];
 
-        if (!$this->showSave) {
+        if (!$this->showExport) {
             unset($this->footerButtons[0]);
         }
         if (!$this->showPreview) {

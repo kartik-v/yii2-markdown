@@ -35,7 +35,7 @@ function isNumber(n) {
     return !isNaN(parseFloat(n)) && isFinite(n);
 }
 
-function genSaveFile(vCss, vHeader, vData, vType, vAlert, vUrl, vNullMsg) {
+function genExportFile(vCss, vHeader, vData, vType, vAlert, vUrl, vNullMsg) {
     alert(vAlert)
     output = vHeader + vData
 
@@ -334,8 +334,8 @@ function initEditor(params) {
         maximize = params.maximize,
         container = params.container,
         modal = editor.slice(1) + '-modal',
-        save1 = params.save1,
-        save2 = params.save2,
+        export1 = params.export1,
+        export2 = params.export2,
         defHeight = params.height
 
     $(input).focus(function() {
@@ -350,12 +350,12 @@ function initEditor(params) {
         togglePreview(params);
     });
 
-    $(save1).click(function() {
-        genSaveFile('', params.saveHeader, $(input).val(), 'Text', params.saveText, params.url, params.nullMsg);
+    $(export1).click(function() {
+        genExportFile('', params.exportHeader, $(input).val(), 'Text', params.exportText, params.url, params.nullMsg);
     });
 
-    $(save2).click(function() {
-        genSaveFile(params.saveCss, params.saveHeader, $(input).val(), 'HTML', params.saveHtml, params.url, params.nullMsg);
+    $(export2).click(function() {
+        genExportFile(params.exportCss, params.exportHeader, $(input).val(), 'HTML', params.exportHtml, params.url, params.nullMsg);
     });
 
     $('body').remove('.kv-fullscreen');
