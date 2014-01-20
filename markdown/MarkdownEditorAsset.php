@@ -18,13 +18,13 @@ use yii\web\AssetBundle;
  */
 class MarkdownEditorAsset extends AssetBundle {
 
-    public $sourcePath = '@vendor/kartik-v/yii2-markdown/kartik/assets';
     public $depends = [
         'yii\web\JqueryAsset',
         'yii\bootstrap\BootstrapAsset',
     ];
 
     public function init() {
+        $this->sourcePath = __DIR__ . '/../assets';
         $this->css = YII_DEBUG ? ['css/kv-markdown.css'] : ['css/kv-markdown.min.css'];
         $this->js = YII_DEBUG ? ['js/rangyinputs-jquery-1.1.2.js', 'js/kv-markdown.js'] : ['js/rangyinputs-jquery-1.1.2.min.js', 'js/kv-markdown.min.js'];
         parent::init();

@@ -18,7 +18,6 @@
         "michelf/php-smartypants": "*"
     },
     "autoload": {
-        "psr-0": {"kartik\\": ""}
-    },
-    "target-dir": "kartik"
+        "psr-4": {"kartik\\": ""}
+    }
 }
