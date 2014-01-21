@@ -437,7 +437,7 @@ EOT;
         MarkdownEditorAsset::register($view);
         $params = [
             'container' => '#' . $this->containerOptions['id'],
-            'editor' => '#' . $this->options['id'],
+            'editor' => '#' . $this->editorOptions['id'],
             'toolbar' => '#' . $this->headerOptions['id'],
             'source' => '#' . $this->inputOptions['id'],
             'target' => '#' . $this->previewOptions['id'],

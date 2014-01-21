@@ -365,6 +365,7 @@ function initEditor(params) {
     $(editor + ' ' + target).css('max-height', defHeight)
     $(editor + ' textarea').height(defHeight)
 
+	alert (editor + ' textarea: ' + defHeight)
     $(maximize).click(function() {
         toggleScreen(maximize, container, editor, modal, target, defHeight);
     });
