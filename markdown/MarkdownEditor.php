@@ -110,7 +110,7 @@ EOT;
      * @var array the HTML attributes for the container
      * holding the header, input, and footer
      */
-    public $options = ['class' => 'kv-md-editor'];
+    public $editorOptions = ['class' => 'kv-md-editor'];
 
     /**
      * @var array the HTML attributes for the header
@@ -244,7 +244,7 @@ EOT;
         $this->generateMessages();
         $this->registerAssets();
         echo Html::beginTag('div', $this->containerOptions);
-        echo Html::beginTag('div', $this->options);
+        echo Html::beginTag('div', $this->editorOptions);
         echo $this->renderHeader();
         echo $this->renderInput();
         echo $this->renderFooter();
@@ -273,6 +273,9 @@ EOT;
     protected function generateId() {
         if (empty($this->options['id'])) {
             $this->options['id'] = $this->getId();
+        }
+        if (empty($this->editorOptions['id'])) {
+            $this->editorOptions['id'] = $this->getId() . '-editor';
         }
         if (empty($this->containerOptions['id'])) {
             $this->containerOptions['id'] = $this->getId() . '-container';
