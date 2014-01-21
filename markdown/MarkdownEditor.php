@@ -107,6 +107,11 @@ EOT;
     public $encodeLabels = true;
 
     /**
+     * @var array the HTML attributes for the textarea input
+     */
+    public $options = ['class' => 'kv-md-input'];
+
+    /**
      * @var array the HTML attributes for the container
      * holding the header, input, and footer
      */
@@ -116,11 +121,6 @@ EOT;
      * @var array the HTML attributes for the header
      */
     public $headerOptions = ['class' => 'kv-md-header btn-toolbar'];
-
-    /**
-     * @var array the HTML attributes for the textarea input
-     */
-    public $inputOptions = ['class' => 'kv-md-input'];
 
     /**
      * @var array the HTML attributes for the footer
@@ -264,7 +264,7 @@ EOT;
      * @param int $btn the button identifier (one of the BTN constants)
      */
     protected function getButtonId($btn) {
-        return $this->inputOptions['id'] . '-btn-' . $btn;
+        return $this->options['id'] . '-btn-' . $btn;
     }
 
     /**
@@ -275,10 +275,10 @@ EOT;
             $this->options['id'] = $this->getId();
         }
         if (empty($this->editorOptions['id'])) {
-            $this->editorOptions['id'] = $this->getId() . '-editor';
+            $this->editorOptions['id'] = $this->options['id'] . '-editor';
         }
         if (empty($this->containerOptions['id'])) {
-            $this->containerOptions['id'] = $this->getId() . '-container';
+            $this->containerOptions['id'] = $this->options['id'] . '-container';
         }
         if (empty($this->headerOptions['id'])) {
             $this->headerOptions['id'] = $this->options['id'] . '-header';
@@ -288,9 +288,6 @@ EOT;
         }
         if (empty($this->previewOptions['id'])) {
             $this->previewOptions['id'] = $this->options['id'] . '-preview';
-        }
-        if (empty($this->inputOptions['id'])) {
-            $this->inputOptions['id'] = ($this->hasModel()) ? Html::getInputId($this->model, $this->attribute) : $this->options['id'] . '-input';
         }
     }
 
@@ -348,7 +345,7 @@ EOT;
         }
 
         if ($markup) {
-            $options['onclick'] = 'markUp(' . $btn . ', "#' . $this->inputOptions['id'] . '")';
+            $options['onclick'] = 'markUp(' . $btn . ', "#' . $this->options['id'] . '")';
         }
 
         $output = Html::button($label, $options) . "\n";
@@ -357,7 +354,7 @@ EOT;
             $output .= "<ul class='dropdown-menu'>\n";
             foreach ($items as $key => $item) {
                 if ($btn !== self::BTN_EXPORT) {
-                    $item['options']['onclick'] = 'markUp(' . $key . ', "#' . $this->inputOptions['id'] . '")';
+                    $item['options']['onclick'] = 'markUp(' . $key . ', "#' . $this->options['id'] . '")';
                 }
                 $item['options']['id'] = $this->getButtonId($key);
                 $icon = empty($item['icon']) ? '' : '<i class="glyphicon glyphicon-' . $item['icon'] . '"></i> ';
@@ -439,7 +436,7 @@ EOT;
             'container' => '#' . $this->containerOptions['id'],
             'editor' => '#' . $this->editorOptions['id'],
             'toolbar' => '#' . $this->headerOptions['id'],
-            'source' => '#' . $this->inputOptions['id'],
+            'source' => '#' . $this->options['id'],
             'target' => '#' . $this->previewOptions['id'],
             'preview' => '#' . $this->getButtonId(self::BTN_PREVIEW),
             'progress' => $this->previewProgress,
@@ -611,10 +608,10 @@ EOT;
      */
     protected function renderInput() {
         if ($this->hasModel()) {
-            $input = Html::activeTextArea($this->model, $this->attribute, $this->inputOptions);
+            $input = Html::activeTextArea($this->model, $this->attribute, $this->options);
         }
         else {
-            $input = Html::textArea($this->name, $this->value, $this->inputOptions);
+            $input = Html::textArea($this->name, $this->value, $this->options);
         }
         Html::addCssClass($this->previewOptions, 'hidden');
         $preview = Html::tag('div', '', $this->previewOptions);
