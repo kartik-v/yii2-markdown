@@ -5,7 +5,7 @@ This module provides Markdown Editing and Conversion utilities for Yii Framework
 
 ### Markdown
 [```VIEW DEMO```](http://demos.krajee.com/markdown-details/markdown-converter)  
-This is a markdown converter class that extends [Yii's Markdown Helper](https://github.com/yiisoft/yii2/blob/master/framework/helpers/Markdown.php) with advanced functionality. The converter uses [PHP Markdown Extra](http://michelf.ca/projects/php-markdown/extra/) and [PHP SmartyPants](http://michelf.ca/projects/php-smartypants/) for processing Markdown conversion to HTML. It also supports configurable custom conversion processing of patterns for styling your own flavour of Markdown to some extent.
+This is a markdown converter class that extends [Yii's Markdown Helper](https://github.com/yiisoft/yii2/blob/master/framework/helpers/Markdown.php) with advanced functionality. The converter uses [PHP Markdown Extra](http://michelf.ca/projects/php-markdown/extra/) and [PHP SmartyPantsTypographer](http://michelf.ca/projects/php-smartypants/typographer/) for processing Markdown conversion to HTML. It also supports configurable custom conversion processing of patterns for styling your own flavour of Markdown to some extent.
 View [examples and details](http://demos.krajee.com/markdown-details/markdown-converter) or view a [complete demo](http://demos.krajee.com/markdown-demo).
 
 ### MarkdownEditor
@@ -15,7 +15,7 @@ This is an advanced markdown input widget with configurable options. It is style
 1. Configurable toolbar and buttons for formatting content
 2. Live preview of Markdown formatted text as HTML
 3. Maximize editor for full screen editing
-4. Implements PHP Markdown Extra and PHP SmartyPants functionality as provided by the Markdown.
+4. Implements PHP Markdown Extra and PHP SmartyPantsTypographer functionality as provided by the Markdown.
 5. Uses Twitter Bootstrap 3.0 styling wherever possible
 6. Allows saving/exporting of the text-editor contents as Text or HTML
 7. Configurable header, footer, and input options.
@@ -71,7 +71,7 @@ You can setup additional configuration options for the `markdown` module:
 			'<table>' => '<table class="table table-bordered table-striped">'
 		],
 		
-		// whether to use PHP SmartyPants to process Markdown output
+		// whether to use PHP SmartyPantsTypographer to process Markdown output
 		'smartyPants' => true
 	]
 	/* other modules */
