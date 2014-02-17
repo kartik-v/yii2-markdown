@@ -39,7 +39,7 @@ return array(
     'No content to display' => 'Es gibt nichts anzuzeigen',
     'Numbered List' => 'Numerierte Liste',
     'PHP Markdown Extra' => 'PHP Markdown Extra',
-    'PHP SmartyPants' => 'PHP SmartyPants',
+    'PHP SmartyPants Typographer' => 'PHP SmartyPants Typographer',
     'Paragraph' => 'Absatz',
     'Preview' => 'Vorausschau',
     'Preview formatted text' => 'Vorausschau für formatierten Text ',

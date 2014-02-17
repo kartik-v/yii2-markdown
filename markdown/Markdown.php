@@ -8,19 +8,19 @@
 
 namespace kartik\markdown;
 
-use \Michelf\SmartyPants;
+use \Michelf\SmartyPantsTypographer;
 use yii\base\InvalidConfigException;
 
 /**
  * Markdown provides concrete implementation for PHP Markdown Extra
- * and PHP SmartyPants.
+ * and PHP SmartyPantsTypographer.
  *
  * @author Kartik Visweswaran <kartikv2@gmail.com>
  * @since 1.0
  */
 class Markdown extends \yii\helpers\Markdown {
 
-    // SmartyPants does nothing at all
+    // SmartyPantsTypographer does nothing at all
     const SMARTYPANTS_ATTR_DO_NOTHING = 0;
     // "--" for em-dashes; no en-dash support  
     const SMARTYPANTS_ATTR_EM_DASH = 1;
@@ -35,9 +35,9 @@ class Markdown extends \yii\helpers\Markdown {
      * @param string $content
      * @param array $config. Options to configure MarkdownExtra and smarty
      * - markdown: array for MarkdownExtra configuration parameters
-     * - smarty: array for SmartyPants configuration parameters
+     * - smarty: array for SmartyPantsTypographer configuration parameters
      * - custom: array for Custom configuration parameters
-     * @param int $smartyMode the SmartyPants processing mode
+     * @param int $smartyMode the SmartyPantsTypographer processing mode
      * @return string
      * @throws InvalidConfigException if module not set
      */
@@ -52,7 +52,7 @@ class Markdown extends \yii\helpers\Markdown {
             $output = parent::process($content, $mdConfig);
             if ($module->smartyPants) {
                 $smConfig = empty($config['smarty']) ? [] : $config['smarty'];
-                $smarty = new SmartyPants($smartyMode);
+                $smarty = new SmartyPantsTypographer($smartyMode);
                 foreach ($smConfig as $name => $value) {
                     $smarty->{$name} = $value;
                 }

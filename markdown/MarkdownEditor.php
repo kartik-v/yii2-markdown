@@ -15,7 +15,7 @@ use yii\helpers\ArrayHelper;
 use yii\base\InvalidConfigException;
 
 /**
- * A Markdown editor that implements PHP Markdown extra and PHP SmartyPants
+ * A Markdown editor that implements PHP Markdown extra and PHP SmartyPantsTypographer
  * styled using Twitter Bootstrap 3.0. Contains a lot of custom configuration
  * and conversion options.
  *
@@ -414,7 +414,7 @@ EOT;
     protected function getFooterMessage() {
         $bullet = '<i class="glyphicon glyphicon-arrow-right"></i>';
         $link1 = '<a href="http://michelf.ca/projects/php-markdown/extra/" target="_blank">' . Yii::t('markdown', 'PHP Markdown Extra') . '</a>';
-        $link2 = '<a href="http://michelf.ca/projects/php-smartypants/" target="_blank">' . Yii::t('markdown', 'PHP SmartyPants') . '</a>';
+        $link2 = '<a href="http://michelf.ca/projects/php-smartypants/typographer/" target="_blank">' . Yii::t('markdown', 'PHP SmartyPants Typographer') . '</a>';
         $link = $this->_module->smartyPants ? $link1 . ' and ' . $link2 : $link1;
         $msg1 = Yii::t('markdown', '{bullet} You may use {link} syntax.', [
                     'bullet' => $bullet,
