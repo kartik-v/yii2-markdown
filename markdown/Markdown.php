@@ -8,6 +8,7 @@
 
 namespace kartik\markdown;
 
+use \Michelf\MarkdownExtra;
 use \Michelf\SmartyPantsTypographer;
 use yii\base\InvalidConfigException;
 
@@ -18,8 +19,13 @@ use yii\base\InvalidConfigException;
  * @author Kartik Visweswaran <kartikv2@gmail.com>
  * @since 1.0
  */
-class Markdown extends \yii\helpers\Markdown
+class Markdown
 {
+
+    /**
+     * @var MarkdownExtra
+     */
+    protected static $markdown;
 
     // SmartyPantsTypographer does nothing at all
     const SMARTYPANTS_ATTR_DO_NOTHING = 0;
@@ -51,7 +57,7 @@ class Markdown extends \yii\helpers\Markdown
         $output = $content;
         if (strlen($output) > 0) {
             $mdConfig = empty($config['markdown']) ? [] : $config['markdown'];
-            $output = parent::process($content, $mdConfig);
+            $output = static::process($content, $mdConfig);
             if ($module->smartyPants) {
                 $smConfig = empty($config['smarty']) ? [] : $config['smarty'];
                 $smarty = new SmartyPantsTypographer($smartyMode);
@@ -64,6 +70,24 @@ class Markdown extends \yii\helpers\Markdown
             }
         }
         return $output;
+    }
+
+    /**
+     * Converts markdown into HTML
+     *
+     * @param string $content
+     * @param array $config
+     * @return string
+     */
+    public static function process($content, $config = [])
+    {
+        if (static::$markdown === null) {
+            static::$markdown = new MarkdownExtra();
+        }
+        foreach ($config as $name => $value) {
+            static::$markdown->{$name} = $value;
+        }
+        return static::$markdown->transform($content);
     }
 
     /**
