@@ -6,7 +6,7 @@
  * @version 1.0.0
  */
 
-namespace kartik\widgets;
+namespace kartik\markdown;
 
 /**
  * Base asset bundle for all widgets
