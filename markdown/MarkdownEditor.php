@@ -22,7 +22,8 @@ use yii\base\InvalidConfigException;
  * @author Kartik Visweswaran <kartikv2@gmail.com>
  * @since 1.0
  */
-class MarkdownEditor extends \yii\widgets\InputWidget {
+class MarkdownEditor extends \yii\widgets\InputWidget
+{
 
     /**
      * Header toolbar button constants
@@ -68,12 +69,12 @@ class MarkdownEditor extends \yii\widgets\InputWidget {
      * Custom icons to compensate for unavailable Bootstrap glyphicons
      */
     const ICON_CODE = <<< EOT
-	<div style="margin-top: -4px; margin-bottom: -1px;">
-		<span style="font-size: 1.3em;">&lsaquo;</span>/<span style="font-size: 1.3em;">&rsaquo;</span>
-	</div>
+<div style="margin-top: -4px; margin-bottom: -1px;">
+    <span style="font-size: 1.3em;">&lsaquo;</span>/<span style="font-size: 1.3em;">&rsaquo;</span>
+</div>
 EOT;
     const ICON_HR = <<< EOT
-	<span style="color: #888; text-shadow: 0 4px 0 #ccc, 0 -4px 0 #ccc;">&mdash;</span>
+<span style="color: #888; text-shadow: 0 4px 0 #ccc, 0 -4px 0 #ccc;">&mdash;</span>
 EOT;
 
     /**
@@ -81,14 +82,14 @@ EOT;
      * to be setup for a Bootstrap styled toolbar. Each button group is an 
      * array, which requires the following parameters:
      * - buttons: array of buttons to be setup. 
-     *       - Array key is the button identifier. Should be one of the BTN constants.
-     *       - Array values contain these special attributes
-     * 		    - icon: string the name of the glyphicon to be embedded before the label
-     * 		    - label: string the label for the button. By default is HTML encoded and supports localization.
-     * 		    - encodeLabel: boolean whether the label is HTML encoded (if not set will use the
-     * 		      global [[encodeLabels]] setting. If set to false will use the raw label as is.
-     * 			- items: an array for dropdown list of links for each button. Configuration is similar to buttons array.
-     * 		    - options: HTML attributes for each button. If not set will use the global [[buttonOptions]]
+     *   - Array key is the button identifier. Should be one of the BTN constants.
+     *   - Array values contain these special attributes
+     *     - icon: string the name of the glyphicon to be embedded before the label
+     *     - label: string the label for the button. By default is HTML encoded and supports localization.
+     *     - encodeLabel: boolean whether the label is HTML encoded (if not set will use the
+     *       global [[encodeLabels]] setting. If set to false will use the raw label as is.
+     *     - items: an array for dropdown list of links for each button. Configuration is similar to buttons array.
+     *     - options: HTML attributes for each button. If not set will use the global [[buttonOptions]]
      * - options: HTML attributes for the button group
      *
      * @see function [[setDefaultToolbar()]]
@@ -165,14 +166,14 @@ EOT;
      * to be setup for a Bootstrap styled toolbar. Each button group is an 
      * array, which requires the following parameters:
      * - buttons: array of buttons to be setup. 
-     *       - Array key is the button identifier. Should be one of the BTN constants.
-     *       - Array values contain these special attributes
-     * 		    - icon: string the name of the glyphicon to be embedded before the label
-     * 		    - label: string the label for the button. By default is HTML encoded and supports localization.
-     * 		    - encodeLabel: boolean whether the label is HTML encoded (if not set will use the
-     * 		      global [[encodeLabels]] setting. If set to false will use the raw label as is.
-     * 			- items: an array for dropdown list of links for each button. Configuration is similar to buttons array.
-     * 		    - options: HTML attributes for each button. If not set will use the global [[buttonOptions]]
+     *   - the array key is the button identifier. Should be one of the BTN constants.
+     *   - the array values contain these special attributes
+     * 	   - icon: string the name of the glyphicon to be embedded before the label
+     * 	   - label: string the label for the button. By default is HTML encoded and supports localization.
+     * 	   - encodeLabel: boolean whether the label is HTML encoded (if not set will use the
+     * 	     global [[encodeLabels]] setting. If set to false will use the raw label as is.
+     * 	   - items: an array for dropdown list of links for each button. Configuration is similar to buttons array.
+     * 	   - options: HTML attributes for each button. If not set will use the global [[buttonOptions]]
      * - options: HTML attributes for the button group
      *
      * @see function [[setDefaultFooter()]]
@@ -234,7 +235,8 @@ EOT;
     /**
      * Initialize the widget
      */
-    public function init() {
+    public function init()
+    {
         parent::init();
         $this->_module = Yii::$app->getModule('markdown');
         if ($this->_module === null) {
@@ -253,7 +255,8 @@ EOT;
     /**
      * Run the widget
      */
-    public function run() {
+    public function run()
+    {
         parent::run();
         echo Html::endTag('div');
         echo Html::endTag('div');
@@ -263,14 +266,16 @@ EOT;
      * Generate HTML Identifier for a button
      * @param int $btn the button identifier (one of the BTN constants)
      */
-    protected function getButtonId($btn) {
+    protected function getButtonId($btn)
+    {
         return $this->options['id'] . '-btn-' . $btn;
     }
 
     /**
      * Generate HTML identifiers for elements
      */
-    protected function generateId() {
+    protected function generateId()
+    {
         if (empty($this->options['id'])) {
             $this->options['id'] = $this->getId();
         }
@@ -296,7 +301,8 @@ EOT;
      * @param array $group the button group configuration
      * @param boolean $header whether the button group is part of the header
      */
-    protected function renderButtonGroup($group, $header = true) {
+    protected function renderButtonGroup($group, $header = true)
+    {
         $groupOptions = empty($group['options']) ? [] : $group['options'];
         $groupOptions = array_replace($this->buttonGroupOptions, $groupOptions);
         Html::addCssClass($groupOptions, 'btn-group');
@@ -321,7 +327,8 @@ EOT;
      * @param boolean $markup identifies whether the button needs to 
      * call the markdown markup javascript on click. Defaults to true.
      */
-    protected function renderButton($btn, $options = [], $markup = true) {
+    protected function renderButton($btn, $options = [], $markup = true)
+    {
         $icon = ArrayHelper::remove($options, 'icon', '');
         $label = ArrayHelper::remove($options, 'label', '');
         $encodeLabel = ArrayHelper::remove($options, 'encodeLabel', $this->encodeLabels);
@@ -368,7 +375,8 @@ EOT;
     /**
      * Generate default messages
      */
-    public function generateMessages() {
+    public function generateMessages()
+    {
         if (!isset($this->footerMessage)) {
             $this->footerMessage = $this->getFooterMessage();
         }
@@ -411,7 +419,8 @@ EOT;
     /**
      * Generates the footer message
      */
-    protected function getFooterMessage() {
+    protected function getFooterMessage()
+    {
         $bullet = '<i class="glyphicon glyphicon-arrow-right"></i>';
         $link1 = '<a href="http://michelf.ca/projects/php-markdown/extra/" target="_blank">' . Yii::t('markdown', 'PHP Markdown Extra') . '</a>';
         $link2 = '<a href="http://michelf.ca/projects/php-smartypants/typographer/" target="_blank">' . Yii::t('markdown', 'PHP SmartyPants Typographer') . '</a>';
@@ -429,7 +438,8 @@ EOT;
     /**
      * Register client assets
      */
-    protected function registerAssets() {
+    protected function registerAssets()
+    {
         $view = $this->getView();
         MarkdownEditorAsset::register($view);
         $params = [
@@ -459,7 +469,8 @@ EOT;
     /**
      * Setup default header toolbar
      */
-    protected function setDefaultHeader() {
+    protected function setDefaultHeader()
+    {
         if (!empty($this->toolbar)) {
             return;
         }
@@ -539,7 +550,8 @@ EOT;
     /**
      * Setup default footer toolbar
      */
-    protected function setDefaultFooter() {
+    protected function setDefaultFooter()
+    {
         if (!empty($this->footerButtons)) {
             return;
         }
@@ -571,7 +583,8 @@ EOT;
     /**
      * Render the editor header content
      */
-    protected function renderHeader() {
+    protected function renderHeader()
+    {
         $output = '';
         $this->setDefaultHeader();
         foreach ($this->toolbar as $group) {
@@ -586,7 +599,8 @@ EOT;
     /**
      * Render the editor footer content
      */
-    public function renderFooter() {
+    public function renderFooter()
+    {
         $buttons = '';
         $this->setDefaultFooter();
         foreach ($this->footerButtons as $group) {
@@ -606,7 +620,8 @@ EOT;
     /**
      * Render the text area input
      */
-    protected function renderInput() {
+    protected function renderInput()
+    {
         if ($this->hasModel()) {
             $input = Html::activeTextArea($this->model, $this->attribute, $this->options);
         }

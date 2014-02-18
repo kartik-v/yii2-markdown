@@ -16,7 +16,8 @@ use Yii;
  * @author Kartik Visweswaran <kartikv2@gmail.com>
  * @since 1.0
  */
-class Module extends \yii\base\Module {
+class Module extends \yii\base\Module
+{
 
     /**
      * @var string the controller action route used
@@ -45,7 +46,8 @@ class Module extends \yii\base\Module {
      */
     public $i18n = [];
 
-    public function init() {
+    public function init()
+    {
         parent::init();
         Yii::setAlias('@markdown', dirname(__FILE__));
         if (empty($this->i18n)) {

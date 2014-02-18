@@ -18,7 +18,8 @@ use yii\base\InvalidConfigException;
  * @author Kartik Visweswaran <kartikv2@gmail.com>
  * @since 1.0
  */
-class Markdown extends \yii\helpers\Markdown {
+class Markdown extends \yii\helpers\Markdown
+{
 
     // SmartyPantsTypographer does nothing at all
     const SMARTYPANTS_ATTR_DO_NOTHING = 0;
@@ -41,7 +42,8 @@ class Markdown extends \yii\helpers\Markdown {
      * @return string
      * @throws InvalidConfigException if module not set
      */
-    public static function convert($content, $config = [], $smartyMode = self::SMARTYPANTS_ATTR_LONG_EM_DASH_SHORT_EN) {
+    public static function convert($content, $config = [], $smartyMode = self::SMARTYPANTS_ATTR_LONG_EM_DASH_SHORT_EN)
+    {
         $module = \Yii::$app->getModule('markdown');
         if ($module === null) {
             throw new InvalidConfigException("The module 'markdown' was not found. Ensure you have setup the 'markdown' module in your Yii configuration file.");
@@ -70,7 +72,8 @@ class Markdown extends \yii\helpers\Markdown {
      * @param array $config. List of key value pairs to find and replace
      * @return string
      */
-    public static function customProcess($content, $config = []) {
+    public static function customProcess($content, $config = [])
+    {
         if (empty($config)) {
             return $content;
         }
