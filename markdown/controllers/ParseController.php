@@ -13,13 +13,15 @@ use yii\helpers\HtmlPurifier;
 use yii\helpers\Json;
 use kartik\markdown\Markdown;
 
-class ParseController extends \yii\web\Controller {
+class ParseController extends \yii\web\Controller
+{
 
     /**
      * Convert markdown text to HTML for preview
      * @returns JSON encoded HTML output
      */
-    public function actionPreview() {
+    public function actionPreview()
+    {
         $output = '';
         $module = Yii::$app->controller->module;
         if (isset($_POST['source'])) {
