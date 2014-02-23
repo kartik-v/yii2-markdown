@@ -228,6 +228,12 @@ EOT;
     public $showPreview = true;
 
     /**
+     * @var string the bootstrap CSS file on CDN which
+     * will be used to format the exported HTML
+     */
+    public $bootstrapCssFile = 'http://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css';
+
+    /**
      * @var Module
      */
     private $_module;
@@ -405,7 +411,7 @@ EOT;
             ]);
         }
         if (!isset($this->exportCss)) {
-            $this->exportCss = Html::cssFile('http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css') .
+            $this->exportCss = Html::cssFile($this->bootstrapCssFile) .
                     "\n" .
                     Html::style('body{margin:20px;padding:20px;border:1px solid #ddd;border-radius:5px;}' .
                             'th[align="right"]{text-align:right!important;}' .
