@@ -208,9 +208,19 @@ EOT;
 
     /**
      * @var string the header message appended at the beginning of the 
-     * exportd converted output
+     * exported converted output
      */
     public $exportHeader;
+
+    /**
+     * @var string the export meta content to be appended at the beginning  
+     * of the exported converted output
+     */
+    public $exportMeta = <<< EOT
+<!DOCTYPE html>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge;chrome=1"/>
+EOT;
 
     /**
      * @var string the CSS applied to the exported converted output
@@ -465,6 +475,7 @@ EOT;
             'exportText' => $this->exportTextAlert,
             'exportHtml' => $this->exportHtmlAlert,
             'exportHeader' => $this->exportHeader,
+            'exportMeta' => $this->exportMeta . "\n",
             'exportCss' => $this->exportCss
         ];
 

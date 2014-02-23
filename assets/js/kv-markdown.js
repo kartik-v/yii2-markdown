@@ -35,7 +35,7 @@ function isNumber(n) {
     return !isNaN(parseFloat(n)) && isFinite(n);
 }
 
-function genExportFile(vCss, vHeader, vData, vType, vAlert, vUrl, vNullMsg) {
+function genExportFile(vCss, vMeta, vHeader, vData, vType, vAlert, vUrl, vNullMsg) {
     alert(vAlert)
     output = vHeader + vData
 
@@ -50,7 +50,7 @@ function genExportFile(vCss, vHeader, vData, vType, vAlert, vUrl, vNullMsg) {
             },
             success: function(data) {
                 if (data) {
-                    url = "data:x-application/text," + escape(vCss + data)
+                    url = "data:x-application/text," + escape(vMeta) + encodeURIComponent(vCss + data)
                     window.open(url);
                 } else {
                     alert('HTML conversion failed! Try again later.'); // debug purposes
@@ -58,7 +58,7 @@ function genExportFile(vCss, vHeader, vData, vType, vAlert, vUrl, vNullMsg) {
             }
         });
     } else {
-        url = "data:x-application/text," + escape(output)
+        url = "data:x-application/text," + encodeURIComponent(output)
         window.open(url);
     }
 
@@ -351,11 +351,11 @@ function initEditor(params) {
     });
 
     $(export1).click(function() {
-        genExportFile('', params.exportHeader, $(input).val(), 'Text', params.exportText, params.url, params.nullMsg);
+        genExportFile('', '', params.exportHeader, $(input).val(), 'Text', params.exportText, params.url, params.nullMsg);
     });
 
     $(export2).click(function() {
-        genExportFile(params.exportCss, params.exportHeader, $(input).val(), 'HTML', params.exportHtml, params.url, params.nullMsg);
+        genExportFile(params.exportCss, params.exportMeta, params.exportHeader, $(input).val(), 'HTML', params.exportHtml, params.url, params.nullMsg);
     });
 
     $('body').remove('.kv-fullscreen');
