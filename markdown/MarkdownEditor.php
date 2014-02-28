@@ -16,7 +16,7 @@ use yii\base\InvalidConfigException;
 
 /**
  * A Markdown editor that implements PHP Markdown extra and PHP SmartyPantsTypographer
- * styled using Twitter Bootstrap 3.0. Contains a lot of custom configuration
+ * styled using Bootstrap 3.0. Contains a lot of custom configuration
  * and conversion options.
  *
  * @author Kartik Visweswaran <kartikv2@gmail.com>

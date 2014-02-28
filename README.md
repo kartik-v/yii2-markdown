@@ -1,7 +1,7 @@
 yii2-markdown
 =============
 
-This module provides Markdown Editing and Conversion utilities for Yii Framework 2.0. It implements markdown conversion using PHP Markdown Extra and PHP Smarty Pants. In addition, you can customize the flavor of Markdown, by including additional custom conversion patterns. The module also includes an enhanced customized Markdown Editor Widget for markdown editing and preview at runtime. This widget is styled using Twitter Bootstrap 3.0. View a [complete demo](http://demos.krajee.com/markdown-demo).
+This module provides Markdown Editing and Conversion utilities for Yii Framework 2.0. It implements markdown conversion using PHP Markdown Extra and PHP Smarty Pants. In addition, you can customize the flavor of Markdown, by including additional custom conversion patterns. The module also includes an enhanced customized Markdown Editor Widget for markdown editing and preview at runtime. This widget is styled using Bootstrap 3.0. View a [complete demo](http://demos.krajee.com/markdown-demo).
 
 ### Markdown
 [```VIEW DEMO```](http://demos.krajee.com/markdown-details/markdown-converter)  
@@ -10,13 +10,13 @@ View [examples and details](http://demos.krajee.com/markdown-details/markdown-co
 
 ### MarkdownEditor
 [```VIEW DEMO```](http://demos.krajee.com/markdown-details/markdown-editor)  
-This is an advanced markdown input widget with configurable options. It is styled using Twitter Bootstrap 3.0. Key features available with this widget are:
+This is an advanced markdown input widget with configurable options. It is styled using Bootstrap 3.0. Key features available with this widget are:
 
 1. Configurable toolbar and buttons for formatting content
 2. Live preview of Markdown formatted text as HTML
 3. Maximize editor for full screen editing
 4. Implements PHP Markdown Extra and PHP SmartyPantsTypographer functionality as provided by the Markdown.
-5. Uses Twitter Bootstrap 3.0 styling wherever possible
+5. Uses Bootstrap 3.0 styling wherever possible
 6. Allows saving/exporting of the text-editor contents as Text or HTML
 7. Configurable header, footer, and input options.
 8. Supports localization and customization of messages and content.
