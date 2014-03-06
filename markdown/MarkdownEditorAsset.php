@@ -14,7 +14,7 @@ namespace kartik\markdown;
  * @author Kartik Visweswaran <kartikv2@gmail.com>
  * @since 1.0
  */
-class MarkdownEditorAsset extends AssetBundle
+class MarkdownEditorAsset extends \kartik\widgets\AssetBundle
 {
 
     public function init()
