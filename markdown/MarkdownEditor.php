@@ -411,7 +411,7 @@ EOT;
         if (!isset($this->exportHtmlAlert)) {
             $this->exportHtmlAlert = Yii::t('markdown', $exportAlert, [
                         'type' => Yii::t('markdown', 'HTML'),
-                        'ext' => '.txt',
+                        'ext' => '.htm',
                     ]) . "\n\n" . $popupAlert;
         }
         if (!isset($this->exportHeader)) {
