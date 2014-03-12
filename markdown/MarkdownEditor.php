@@ -10,6 +10,7 @@ namespace kartik\markdown;
 
 use Yii;
 use yii\helpers\Html;
+use yii\helpers\Url;
 use yii\helpers\Json;
 use yii\helpers\ArrayHelper;
 use yii\base\InvalidConfigException;
@@ -467,7 +468,7 @@ EOT;
             'preview' => '#' . $this->getButtonId(self::BTN_PREVIEW),
             'progress' => $this->previewProgress,
             'maximize' => '#' . $this->getButtonId(self::BTN_MAXIMIZE),
-            'url' => Yii::$app->controller->createUrl($this->_module->previewAction),
+            'url' => Url::toRoute($this->_module->previewAction),
             'export1' => '#' . $this->getButtonId(self::BTN_EXPORT_1),
             'export2' => '#' . $this->getButtonId(self::BTN_EXPORT_2),
             'nullMsg' => Yii::t('markdown', $this->emptyPreview),
