@@ -48,7 +48,7 @@ return array(
     'Save as HTML' => 'Sauvegarder en HTML',
     'Save as text' => 'Sauvegarder en texte',
     'Text' => 'Texte',
-    'Toggle full screen' => 'Passer en plein écran',
+    'Toggle full screen' => 'Alterner mode plein écran',
     'Unindent Text' => 'Désindenter le texte',
     'URL/Link' => 'URL/Lien',
     'Your {type} file will be generated. Save the file to your client with {ext} extension in the accompanying dialog.' => 'Votre fichier {type} va être généré. Sauvegarder le fichier sur votre client avec l\'extension {ext} dans la boîte de dialogue.',
