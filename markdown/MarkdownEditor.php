@@ -441,7 +441,7 @@ EOT;
         $bullet = '<i class="glyphicon glyphicon-arrow-right"></i>';
         $link1 = '<a href="http://michelf.ca/projects/php-markdown/extra/" target="_blank">' . Yii::t('markdown', 'PHP Markdown Extra') . '</a>';
         $link2 = '<a href="http://michelf.ca/projects/php-smartypants/typographer/" target="_blank">' . Yii::t('markdown', 'PHP SmartyPants Typographer') . '</a>';
-        $link = $this->_module->smartyPants ? $link1 . ' and ' . $link2 : $link1;
+        $link = $this->_module->smartyPants ? $link1 . ' ' . Yii::t('markdown', 'and') . ' ' . $link2 : $link1;
         $msg1 = Yii::t('markdown', '{bullet} You may use {link} syntax.', [
                     'bullet' => $bullet,
                     'link' => $link

@@ -54,4 +54,5 @@ return array(
     'Your {type} file will be generated. Save the file to your client with {ext} extension in the accompanying dialog.' => '',
     '{bullet} To undo / redo, press CTRL-Z / CTRL-Y. You can also undo most button actions by clicking it again.' => '',
     '{bullet} You may use {link} syntax.' => '',
+    'and' => ''
 );

@@ -54,4 +54,5 @@ return array(
     'Your {type} file will be generated. Save the file to your client with {ext} extension in the accompanying dialog.' => 'Votre fichier {type} va être généré. Sauvegarder le fichier sur votre client avec l\'extension {ext} dans la boîte de dialogue.',
     '{bullet} To undo / redo, press CTRL-Z / CTRL-Y. You can also undo most button actions by clicking it again.' => '{bullet} Pour annuler / rétablir, appuyez sur CTRL-Z / CTRL-Y. Vous pouvez également annuler la plupart des actions des boutons en cliquant dessus de nouveau.',
     '{bullet} You may use {link} syntax.' => '{bullet} Vous pouvez utiliser la syntaxe : {link}',
+    'and' => 'et'
 );
