@@ -448,8 +448,10 @@ EOT;
 			'bullet' => $bullet,
 			'link' => $link
 		]);
-		$msg2 = Yii::t('markdown', '{bullet} To undo / redo, press CTRL-Z / CTRL-Y. You can also undo most button actions by clicking it again.', [
+        $keys = '<kbd>' . Yii::t('markdown', 'CTRL-Z') . '</kbd>/<kbd>'  . Yii::t('markdown', 'CTRL-Y') . '</kbd>';
+		$msg2 = Yii::t('markdown', '{bullet} To undo / redo, press {keys}. You can also undo most button actions by clicking it again.', [
 			'bullet' => $bullet,
+            'keys' => $keys
 		]);
 		return $msg1 . '<br>' . $msg2;
 	}

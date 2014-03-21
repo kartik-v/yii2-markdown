@@ -52,7 +52,9 @@ return array(
 	'Unindent Text' => 'Text ausrücken',
 	'URL/Link' => 'URL/Link',
 	'Your {type} file will be generated. Save the file to your client with {ext} extension in the accompanying dialog.' => 'Ihre {type}-Datei wird erzeugt. Speichern Sie die Datei auf Ihrem Rechner mit der Erweiterung .htm/.html im nachfolgenden Dialog.',
+	'{bullet} To undo / redo, press {keys}. You can also undo most button actions by clicking it again.' => '{bullet} Rückgängig machen/Wiederherstellen via {keys}. Die meisten Button-Aktionen können Sie auch durch erneutes Anklicken rückgängig machen.',
+    'CTRL-Z' => 'STRG-Z',
+    'CTRL-Y' => 'STRG-Y',
 	'{bullet} You may use {link} syntax.' => '{bullet} Sie können die {link} Syntax nutzen.',
-	'{bullet} To undo / redo, press CTRL-Z / CTRL-Y. You can also undo most button actions by clicking it again.' => '{bullet} Rückgängig machen/Wiederherstellen via STRG-Z/STRG-Y. Die meisten Button-Aktionen können Sie auch durch erneutes Anklicken rückgängig machen.',
 	'and' => 'und'
 );
