@@ -17,12 +17,15 @@
  *
  * NOTE: this file must be saved in UTF-8 encoding.
  */
-return array(
+return [
+	'and' => '',
 	'Append Line Break' => '',
 	'Block Quote' => '',
 	'Bold' => '',
 	'Bulleted List' => '',
 	'Code Block' => '',
+    'CTRL-Z' => 'CTRL-Z',
+    'CTRL-Y' => 'CTRL-Y',
 	'Definition List' => '',
 	'Disable any popup blockers in your browser to ensure proper download.' => '',
 	'Footnote' => '',
@@ -35,6 +38,7 @@ return array(
 	'Inline Code' => '',
 	'Italic' => '',
 	'Loading Preview ' => '',
+	'markdown-export' => '',
 	'Markdown Export{line} *Generated {date} by {class}' => '',
 	'No content to display' => '',
 	'Numbered List' => '',
@@ -51,8 +55,7 @@ return array(
 	'Toggle full screen' => '',
 	'Unindent Text' => '',
 	'URL/Link' => '',
-	'Your {type} file will be generated. Save the file to your client with {ext} extension in the accompanying dialog.' => '',
+	'Your {type} file will be generated and downloaded as {filename}.' => '',
 	'{bullet} To undo / redo, press {keys}. You can also undo most button actions by clicking it again.' => '',
-	'{bullet} You may use {link} syntax.' => '',
-	'and' => ''
-);
+	'{bullet} You may use {link} syntax.' => ''
+];

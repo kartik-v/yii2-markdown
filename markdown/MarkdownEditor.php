@@ -214,6 +214,11 @@ EOT;
 	public $exportHeader;
 
 	/**
+	 * @var string the export file name for download. Defaults to `markdown-export`.
+	 */
+	public $exportFileName;
+
+	/**
 	 * @var string the export meta content to be appended at the beginning
 	 * of the exported converted output
 	 */
@@ -275,6 +280,7 @@ EOT;
 	public function run()
 	{
 		parent::run();
+		echo $this->renderExportForm();
 		echo Html::endTag('div');
 		echo Html::endTag('div');
 	}
@@ -312,6 +318,21 @@ EOT;
 		if (empty($this->previewOptions['id'])) {
 			$this->previewOptions['id'] = $this->options['id'] . '-preview';
 		}
+	}
+
+	/**
+	 * Renders a hidden form for submitting the exported content for download.
+	 *
+	 * @return string
+	 */
+	protected function renderExportForm()
+	{
+		$action = $this->_module->downloadAction;
+		if (!is_array($action)) {
+			$action = [$action];
+		}
+		return Html::beginForm($action, 'post', ['class' => 'kv-export-form', 'style' => 'display:none', 'target' => '_blank']) .
+		Html::textInput('export_filetype') . Html::textInput('export_filename') . Html::textArea('export_content') . '</form>';
 	}
 
 	/**
@@ -402,18 +423,21 @@ EOT;
 		if (!isset($this->emptyPreview)) {
 			$this->emptyPreview = '<p class="help-block text-center">' . Yii::t('markdown', 'No content to display') . '</p>';
 		}
-		$exportAlert = 'Your {type} file will be generated. Save the file to your client with {ext} extension in the accompanying dialog.';
+		$exportAlert = 'Your {type} file will be generated and downloaded as {filename}.';
 		$popupAlert = Yii::t('markdown', 'Disable any popup blockers in your browser to ensure proper download.');
+		if (empty($this->exportFileName)) {
+			$this->exportFileName = Yii::t('markdown', 'markdown-export');
+		}
 		if (!isset($this->exportTextAlert)) {
 			$this->exportTextAlert = Yii::t('markdown', $exportAlert, [
 					'type' => Yii::t('markdown', 'TEXT'),
-					'ext' => '.txt',
+					'filename' => $this->exportFileName . '.txt',
 				]) . "\n\n" . $popupAlert;
 		}
 		if (!isset($this->exportHtmlAlert)) {
 			$this->exportHtmlAlert = Yii::t('markdown', $exportAlert, [
 					'type' => Yii::t('markdown', 'HTML'),
-					'ext' => '.htm',
+					'filename' => $this->exportFileName . '.htm',
 				]) . "\n\n" . $popupAlert;
 		}
 		if (!isset($this->exportHeader)) {
@@ -448,10 +472,10 @@ EOT;
 			'bullet' => $bullet,
 			'link' => $link
 		]);
-        $keys = '<kbd>' . Yii::t('markdown', 'CTRL-Z') . '</kbd> / <kbd>'  . Yii::t('markdown', 'CTRL-Y') . '</kbd>';
+		$keys = '<kbd>' . Yii::t('markdown', 'CTRL-Z') . '</kbd> / <kbd>' . Yii::t('markdown', 'CTRL-Y') . '</kbd>';
 		$msg2 = Yii::t('markdown', '{bullet} To undo / redo, press {keys}. You can also undo most button actions by clicking it again.', [
 			'bullet' => $bullet,
-            'keys' => $keys
+			'keys' => $keys
 		]);
 		return $msg1 . '<br>' . $msg2;
 	}
@@ -481,7 +505,8 @@ EOT;
 			'exportHtml' => $this->exportHtmlAlert,
 			'exportHeader' => $this->exportHeader,
 			'exportMeta' => $this->exportMeta . "\n",
-			'exportCss' => $this->exportCss
+			'exportCss' => $this->exportCss,
+			'filename' => $this->exportFileName
 		];
 
 		$js = 'initEditor(' . Json::encode($params) . ')';

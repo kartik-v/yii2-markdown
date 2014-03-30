@@ -35,10 +35,16 @@ function isNumber(n) {
 	return !isNaN(parseFloat(n)) && isFinite(n);
 }
 
-function genExportFile(vCss, vMeta, vHeader, vData, vType, vAlert, vUrl, vNullMsg) {
+function download(form, filename, type, content) {
+	form.find('[name="export_filetype"]').val(type);
+	form.find('[name="export_filename"]').val(filename);
+	form.find('[name="export_content"]').val(content);
+	form.submit();
+};
+
+function genExportFile(form, filename, vCss, vMeta, vHeader, vData, vType, vAlert, vUrl, vNullMsg) {
 	alert(vAlert)
 	output = vHeader + vData
-
 	if (vType == 'HTML') {
 		$.ajax({
 			type: "POST",
@@ -50,16 +56,14 @@ function genExportFile(vCss, vMeta, vHeader, vData, vType, vAlert, vUrl, vNullMs
 			},
 			success: function (data) {
 				if (data) {
-					url = "data:x-application/text," + escape(vMeta) + encodeURIComponent(vCss + data)
-					window.open(url);
+					download(form, filename, 'htm', vMeta + vCss + data);
 				} else {
 					alert('HTML conversion failed! Try again later.'); // debug purposes
 				}
 			}
 		});
 	} else {
-		url = "data:x-application/text," + encodeURIComponent(output)
-		window.open(url);
+		download(form, filename, 'txt', output);
 	}
 
 }
@@ -336,7 +340,9 @@ function initEditor(params) {
 		modal = editor.slice(1) + '-modal',
 		export1 = params.export1,
 		export2 = params.export2,
-		defHeight = params.height
+		defHeight = params.height,
+		$form = $(container + ' .kv-export-form'),
+		filename = params.filename;
 
 	$(input).focus(function () {
 		$(editor).addClass('active');
@@ -351,11 +357,11 @@ function initEditor(params) {
 	});
 
 	$(export1).click(function () {
-		genExportFile('', '', params.exportHeader, $(input).val(), 'Text', params.exportText, params.url, params.nullMsg);
+		genExportFile($form, filename, '', '', params.exportHeader, $(input).val(), 'Text', params.exportText, params.url, params.nullMsg);
 	});
 
 	$(export2).click(function () {
-		genExportFile(params.exportCss, params.exportMeta, params.exportHeader, $(input).val(), 'HTML', params.exportHtml, params.url, params.nullMsg);
+		genExportFile($form, filename, params.exportCss, params.exportMeta, params.exportHeader, $(input).val(), 'HTML', params.exportHtml, params.url, params.nullMsg);
 	});
 
 	$('body').remove('.kv-fullscreen');

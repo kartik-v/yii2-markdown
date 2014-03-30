@@ -17,12 +17,15 @@
  *
  * NOTE: this file must be saved in UTF-8 encoding.
  */
-return array(
+return [
+	'and' => 'und',
 	'Append Line Break' => 'Zeilenumbruch anhängen',
 	'Block Quote' => 'Zitat',
 	'Bold' => 'Fett',
 	'Bulleted List' => 'Aufzählung',
 	'Code Block' => 'Code-Block',
+	'CTRL-Z' => 'STRG-Z',
+	'CTRL-Y' => 'STRG-Y',
 	'Definition List' => 'Liste von Definitionen',
 	'Disable any popup blockers in your browser to ensure proper download.' => 'Deaktivieren Sie alle Popup-Blocker in Ihrem Browser, damit das Runterladen reibungslos funktioniert.',
 	'Footnote' => 'Fußnote',
@@ -35,6 +38,7 @@ return array(
 	'Inline Code' => 'Inline-Code',
 	'Italic' => 'Kursiv',
 	'Loading Preview' => 'Vorschau wird geladen',
+	'markdown-export' => 'markdown-export',
 	'Markdown Export{line} *Generated {date} by {class}' => 'Markdown Export{line} *Erzeugt am {date} von {class}',
 	'No content to display' => 'Es gibt nichts anzuzeigen',
 	'Numbered List' => 'Numerierte Liste',
@@ -51,10 +55,7 @@ return array(
 	'Toggle full screen' => 'In Vollbildmodus umschalten',
 	'Unindent Text' => 'Text ausrücken',
 	'URL/Link' => 'URL/Link',
-	'Your {type} file will be generated. Save the file to your client with {ext} extension in the accompanying dialog.' => 'Ihre {type}-Datei wird erzeugt. Speichern Sie die Datei auf Ihrem Rechner mit der Erweiterung .htm/.html im nachfolgenden Dialog.',
+	'Your {type} file will be generated and downloaded as {filename}.' => 'Ihre {type}-Datei wird erzeugt und als {filename} heruntergeladen werden.',
 	'{bullet} To undo / redo, press {keys}. You can also undo most button actions by clicking it again.' => '{bullet} Rückgängig machen/Wiederherstellen via {keys}. Die meisten Button-Aktionen können Sie auch durch erneutes Anklicken rückgängig machen.',
-    'CTRL-Z' => 'STRG-Z',
-    'CTRL-Y' => 'STRG-Y',
-	'{bullet} You may use {link} syntax.' => '{bullet} Sie können die {link} Syntax nutzen.',
-	'and' => 'und'
-);
+	'{bullet} You may use {link} syntax.' => '{bullet} Sie können die {link} Syntax nutzen.'
+];

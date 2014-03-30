@@ -26,6 +26,12 @@ class Module extends \yii\base\Module
 	public $previewAction = '/markdown/parse/preview';
 
 	/**
+	 * @var string the controller action route used
+	 * for downloading the markdown exported file
+	 */
+	public $downloadAction = '/markdown/parse/download';
+
+	/**
 	 * @var array the list of custom conversion patterns
 	 * - array key is the pattern to search
 	 * - array value is the pattern to replace
