@@ -291,6 +291,7 @@ EOT;
      * Generate HTML Identifier for a button
      *
      * @param int $btn the button identifier (one of the BTN constants)
+     * @return string
      */
     protected function getButtonId($btn)
     {
@@ -334,7 +335,10 @@ EOT;
             $action = [$action];
         }
         return Html::beginForm($action, 'post', ['class' => 'kv-export-form', 'style' => 'display:none', 'target' => '_blank']) .
-        Html::textInput('export_filetype') . Html::textInput('export_filename') . Html::textArea('export_content') . '</form>';
+        Html::textInput('export_filetype', '', ['style' => 'display:none']) .
+        Html::textInput('export_filename', '', ['style' => 'display:none']) .
+        Html::textArea('export_content', '', ['style' => 'display:none']) .
+        Html::endForm();
     }
 
     /**
@@ -342,6 +346,8 @@ EOT;
      *
      * @param array $group the button group configuration
      * @param boolean $header whether the button group is part of the header
+     *
+     * @return string
      */
     protected function renderButtonGroup($group, $header = true)
     {
@@ -368,6 +374,7 @@ EOT;
      * @param array $options the HTML attributes for the button
      * @param boolean $markup identifies whether the button needs to
      * call the markdown markup javascript on click. Defaults to true.
+     * @return string
      */
     protected function renderButton($btn, $options = [], $markup = true)
     {
@@ -452,9 +459,11 @@ EOT;
         if (!isset($this->exportCss)) {
             $this->exportCss = Html::cssFile($this->bootstrapCssFile) .
                 "\n" .
-                Html::style('body{margin:20px;padding:20px;border:1px solid #ddd;border-radius:5px;}' .
+                Html::style(
+                    'body{margin:20px;padding:20px;border:1px solid #ddd;border-radius:5px;}' .
                     'th[align="right"]{text-align:right!important;}' .
-                    'th[align="center"]{text-align:center!important;}');
+                    'th[align="center"]{text-align:center!important;}'
+                );
         }
         if (!isset($this->previewProgress)) {
             $this->previewProgress = '<div class="kv-loading">' . Yii::t('markdown', 'Loading Preview') . ' &hellip;</div>';
