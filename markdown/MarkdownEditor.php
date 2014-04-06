@@ -280,7 +280,9 @@ EOT;
     public function run()
     {
         parent::run();
-        echo $this->renderExportForm();
+        if ($this->showExport) {
+            echo $this->renderExportForm();
+        }
         echo Html::endTag('div');
         echo Html::endTag('div');
     }
