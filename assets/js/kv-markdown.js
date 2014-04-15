@@ -343,7 +343,7 @@ function initEditor(params) {
         defHeight = params.height,
         $form = $(container + ' .kv-export-form'),
         filename = params.filename;
-
+    
     $(input).focus(function () {
         $(editor).addClass('active');
     });
@@ -374,4 +374,6 @@ function initEditor(params) {
     $(maximize).click(function () {
         toggleScreen(maximize, container, editor, modal, target, defHeight);
     });
+    
+    $('body').append($form);
 }
