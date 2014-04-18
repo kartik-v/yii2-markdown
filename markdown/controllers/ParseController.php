@@ -27,7 +27,7 @@ class ParseController extends \yii\web\Controller
         $module = Yii::$app->controller->module;
         $parser = $module->get('parser');
         if (isset($_POST['source'])) {
-            $output = (strlen($_POST['source']) > 0) ? parser->convert($_POST['source'], ['custom' => $module->customConversion]) : $_POST['nullMsg'];
+            $output = (strlen($_POST['source']) > 0) ? $parser->convert($_POST['source']) : $_POST['nullMsg'];
         }
         echo Json::encode(HtmlPurifier::process($output));
     }
