@@ -14,6 +14,7 @@ use yii\helpers\Url;
 use yii\helpers\Json;
 use yii\helpers\ArrayHelper;
 use yii\base\InvalidConfigException;
+use yii\web\View;
 
 /**
  * A Markdown editor that implements PHP Markdown extra and PHP SmartyPantsTypographer
@@ -254,6 +255,8 @@ EOT;
      */
     private $_module;
 
+    private $_iframeId;
+
     /**
      * Initialize the widget
      */
@@ -321,6 +324,7 @@ EOT;
         if (empty($this->previewOptions['id'])) {
             $this->previewOptions['id'] = $this->options['id'] . '-preview';
         }
+        $this->_iframeId = $this->options['id'] . '-export';
     }
 
     /**
@@ -334,14 +338,7 @@ EOT;
         if (!is_array($action)) {
             $action = [$action];
         }
-        $frameId = $this->options['id'] . '_export';
-        $iframe = '<iframe style="width: 0px; height: 0px;" scrolling="no" frameborder="0" border="0" id="' . $frameId .'" name="' . $frameId . '"></iframe>';
-        return Html::beginForm($action, 'post', ['class' => 'kv-export-form', 'style' => 'display:none', 'target' => $frameId]) .
-        Html::textInput('export_filetype', '', ['style' => 'display:none']) .
-        Html::textInput('export_filename', '', ['style' => 'display:none']) .
-        Html::textArea('export_content', '', ['style' => 'display:none']) .
-        Html::endForm() .
-        $iframe;
+        return '<iframe style="width:0px; height:0px; display:none;" scrolling="no" frameborder="0" border="0" id="' . $this->_iframeId . '" name="' . $this->_iframeId . '" src="' . Url::to($action) . '"></iframe>';
     }
 
     /**
@@ -520,9 +517,10 @@ EOT;
             'exportHeader' => $this->exportHeader,
             'exportMeta' => $this->exportMeta . "\n",
             'exportCss' => $this->exportCss,
-            'filename' => $this->exportFileName
+            'filename' => $this->exportFileName,
+            'iframeId' => $this->_iframeId
         ];
-        $js = 'initEditor(' . Json::encode($params) . ')';
+        $js = '$(window).load(function(){initEditor(' . Json::encode($params) . ')});';
         $view->registerJs($js);
     }
 

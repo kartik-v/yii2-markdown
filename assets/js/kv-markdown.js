@@ -341,9 +341,10 @@ function initEditor(params) {
         export1 = params.export1,
         export2 = params.export2,
         defHeight = params.height,
-        $form = $(container + ' .kv-export-form'),
-        filename = params.filename;
-    
+        $iframe = $('#' + params.iframeId),
+        $form = $iframe.contents().find('form');
+    filename = params.filename;
+
     $(input).focus(function () {
         $(editor).addClass('active');
     });
@@ -374,6 +375,4 @@ function initEditor(params) {
     $(maximize).click(function () {
         toggleScreen(maximize, container, editor, modal, target, defHeight);
     });
-    
-    $('body').append($form);
 }
