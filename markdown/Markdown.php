@@ -11,6 +11,7 @@ namespace kartik\markdown;
 use \Michelf\MarkdownExtra;
 use \Michelf\SmartyPantsTypographer;
 use yii\base\InvalidConfigException;
+use yii\base\Component;
 
 /**
  * Markdown provides concrete implementation for PHP Markdown Extra
@@ -19,13 +20,20 @@ use yii\base\InvalidConfigException;
  * @author Kartik Visweswaran <kartikv2@gmail.com>
  * @since 1.0
  */
-class Markdown
+class Markdown extends Component
 {
 
     /**
      * @var MarkdownExtra
      */
-    protected static $markdown;
+    protected $markdown;
+
+    protected $mdConfig;
+    protected $smConfig;
+    protected $cuConfig;
+
+    public $config;
+    public $module;
 
     // SmartyPantsTypographer does nothing at all
     const SMARTYPANTS_ATTR_DO_NOTHING = 0;
@@ -35,6 +43,18 @@ class Markdown
     const SMARTYPANTS_ATTR_LONG_EM_DASH_SHORT_EN = 2;
     // "--" for em-dashes; "---" for en-dashes
     const SMARTYPANTS_ATTR_SHORT_EM_DASH_LONG_EN = 3;
+
+    public function init()
+    {
+        $this->module = \Yii::$app->getModule('markdown');
+        if ($this->module === null) {
+            throw new InvalidConfigException("The module 'markdown' was not found. Ensure you have setup the 'markdown' module in your Yii configuration file.");
+        }
+
+        $this->mdConfig = empty($config['markdown']) ? [] : $config['markdown'];
+        $this->smConfig = empty($config['smarty']) ? [] : $config['smarty'];
+        $this->cuConfig = empty($config['custom']) ? $this->module->customConversion : $config['custom'];
+    }
 
     /**
      * Converts markdown into HTML
@@ -48,28 +68,33 @@ class Markdown
      * @return string
      * @throws InvalidConfigException if module not set
      */
-    public static function convert($content, $config = [], $smartyMode = self::SMARTYPANTS_ATTR_LONG_EM_DASH_SHORT_EN)
+    public function convert($content, $smartyMode = self::SMARTYPANTS_ATTR_LONG_EM_DASH_SHORT_EN)
     {
-        $module = \Yii::$app->getModule('markdown');
-        if ($module === null) {
-            throw new InvalidConfigException("The module 'markdown' was not found. Ensure you have setup the 'markdown' module in your Yii configuration file.");
-        }
         $output = $content;
         if (strlen($output) > 0) {
-            $mdConfig = empty($config['markdown']) ? [] : $config['markdown'];
-            $output = static::process($content, $mdConfig);
-            if ($module->smartyPants) {
-                $smConfig = empty($config['smarty']) ? [] : $config['smarty'];
+            $output = $this->beforeProcess($output);
+            $output = $this->process($output);
+            $output = $this->afterProcess($output);
+            if ($this->module->smartyPants) {
                 $smarty = new SmartyPantsTypographer($smartyMode);
-                foreach ($smConfig as $name => $value) {
+                foreach ($this->smConfig as $name => $value) {
                     $smarty->{$name} = $value;
                 }
                 $output = $smarty->transform($output);
-                $cuConfig = empty($config['custom']) ? $module->customConversion : $config['custom'];
-                $output = static::customProcess($output, $cuConfig);
+                $output = $this->customProcess($output);
             }
         }
         return $output;
+    }
+
+    public function beforeProcess($content)
+    {
+       return $content; 
+    }
+
+    public function afterProcess($content)
+    {
+        return $content;
     }
 
     /**
@@ -79,15 +104,15 @@ class Markdown
      * @param array $config
      * @return string
      */
-    public static function process($content, $config = [])
+    public function process($content)
     {
-        if (static::$markdown === null) {
-            static::$markdown = new MarkdownExtra();
+        if ($this->markdown === null) {
+            $this->markdown = new MarkdownExtra();
         }
-        foreach ($config as $name => $value) {
-            static::$markdown->{$name} = $value;
+        foreach ($this->mdConfig as $name => $value) {
+            $this->markdown->{$name} = $value;
         }
-        return static::$markdown->transform($content);
+        return $this->markdown->transform($content);
     }
 
     /**
@@ -97,12 +122,12 @@ class Markdown
      * @param array $config . List of key value pairs to find and replace
      * @return string
      */
-    public static function customProcess($content, $config = [])
+    public function customProcess($content)
     {
-        if (empty($config)) {
+        if (empty($this->cuConfig)) {
             return $content;
         }
-        return strtr($content, $config);
+        return strtr($content, $this->cuConfig);
     }
 
 }
