@@ -27,6 +27,11 @@
     padding: 6px 4px;
 }
 
+.kv-md-header .btn-sm {
+    width: 34px;
+    height: 30px;
+}
+
 .kv-heading-1 {
     font-size: 36px;
 }
