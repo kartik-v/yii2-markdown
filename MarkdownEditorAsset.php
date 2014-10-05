@@ -19,7 +19,7 @@ class MarkdownEditorAsset extends \kartik\widgets\AssetBundle
 
     public function init()
     {
-        $this->setSourcePath(__DIR__ . '/../assets');
+        $this->setSourcePath(__DIR__ . '/assets');
         $this->setupAssets('css', ['css/kv-markdown']);
         $this->setupAssets('js', ['js/rangyinputs-jquery-1.1.2', 'js/kv-markdown']);
         parent::init();
