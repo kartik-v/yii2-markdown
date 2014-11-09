@@ -17,7 +17,6 @@
         "michelf/php-markdown": "*",
         "michelf/php-smartypants": "*"
     },
-    "minimum-stability": "stable",
     "autoload": {
         "psr-4": {
             "kartik\\markdown\\": ""
