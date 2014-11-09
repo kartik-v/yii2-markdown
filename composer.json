@@ -13,10 +13,11 @@
         }
     ],
     "require": {
-        "kartik-v/yii2-widgets": "*",
+        "kartik-v/yii2-krajee-base": "*",
         "michelf/php-markdown": "*",
         "michelf/php-smartypants": "*"
     },
+    "minimum-stability": "stable",
     "autoload": {
         "psr-4": {
             "kartik\\markdown\\": ""

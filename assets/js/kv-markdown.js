@@ -7,12 +7,12 @@
  *
  * https://github.com/kartik-v/yii2-markdown
  * 
- * Copyright (c) 2013, Kartik Visweswaran  
+ * Copyright (c) 2014, Kartik Visweswaran  
  * Krajee.com  
  * Licensed under BSD-3 License. 
  * Refer attached LICENSE.md for details. 
  * Version: 1.0.1
- * Build date: 6 September 2013
+ * Build date: 6 September 2014
  */
 String.prototype.trimRight = function (charlist) {
     if (charlist === undefined) {
