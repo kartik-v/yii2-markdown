@@ -3,9 +3,9 @@ version 1.2.0
 *Date:* 16-Dec-2014
 
 - (enh #9): German translations updated
-- (enh #13): French translations updated
-- (enh #19): Russian translations updated
-- (enh #20): Italian translations updated
+- (enh #13): French translations included
+- (enh #19): Russian translations included
+- (enh #20): Italian translations included
 - (enh #29): Hungarian translations included
 - (enh #30): Set dependency on Bootstrap Plugin Asset
 
