@@ -11,7 +11,7 @@
  * Krajee.com  
  * Licensed under BSD-3 License. 
  * Refer attached LICENSE.md for details. 
- * Version: 1.0.1
+ * Version: 1.2.0
  * Build date: 6 September 2014
  */
 String.prototype.trimRight = function (charlist) {

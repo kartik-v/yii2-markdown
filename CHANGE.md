@@ -1,3 +1,9 @@
+version 1.2.0
+=============
+*Date:* 16-Dec-2014
+
+- (enh #30): Set dependency on Bootstrap Plugin Asset.
+
 version 1.1.0
 =============
 
