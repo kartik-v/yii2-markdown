@@ -1,3 +1,12 @@
+version 1.3.0
+=============
+*Date:* 12-Jan-2015
+
+- Revamp to use new Krajee base Module and TranslationTrait.
+- Change message file category name to begin with `kv` prefix.
+- Code formatting updates as per Yii2 coding style.
+- Set release to stable
+
 version 1.2.0
 =============
 *Date:* 16-Dec-2014

@@ -1,9 +1,10 @@
 <?php
 
 /**
+ * @package   yii2-markdown
+ * @author    Kartik Visweswaran <kartikv2@gmail.com>
  * @copyright Copyright &copy; Kartik Visweswaran, Krajee.com, 2014
- * @package yii2-markdown
- * @version 1.2.0
+ * @version   1.3.0
  */
 
 namespace kartik\markdown;
@@ -16,9 +17,8 @@ use Yii;
  * @author Kartik Visweswaran <kartikv2@gmail.com>
  * @since 1.0
  */
-class Module extends \yii\base\Module
+class Module extends \kartik\base\Module
 {
-
     /**
      * @var string the controller action route used
      * for markdown editor preview
@@ -46,24 +46,10 @@ class Module extends \yii\base\Module
      */
     public $smartyPants = true;
 
-    /**
-     * @var array the the internalization configuration for
-     * this module
-     */
-    public $i18n = [];
-
     public function init()
     {
+        $this->_msgCat = 'kvmarkdown';
         parent::init();
-        Yii::setAlias('@markdown', dirname(__FILE__));
-        if (empty($this->i18n)) {
-            $this->i18n = [
-                'class' => 'yii\i18n\PhpMessageSource',
-                'basePath' => '@markdown/messages',
-                'forceTranslation' => true
-            ];
-        }
-        Yii::$app->i18n->translations['markdown'] = $this->i18n;
     }
 
 }

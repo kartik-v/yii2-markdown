@@ -1,9 +1,10 @@
 <?php
 
 /**
+ * @package   yii2-markdown
+ * @author    Kartik Visweswaran <kartikv2@gmail.com>
  * @copyright Copyright &copy; Kartik Visweswaran, Krajee.com, 2014
- * @package yii2-markdown
- * @version 1.2.0
+ * @version   1.3.0
  */
 
 namespace kartik\markdown;
@@ -21,12 +22,6 @@ use yii\base\InvalidConfigException;
  */
 class Markdown
 {
-
-    /**
-     * @var MarkdownExtra
-     */
-    protected static $markdown;
-
     // SmartyPantsTypographer does nothing at all
     const SMARTYPANTS_ATTR_DO_NOTHING = 0;
     // "--" for em-dashes; no en-dash support
@@ -37,14 +32,20 @@ class Markdown
     const SMARTYPANTS_ATTR_SHORT_EM_DASH_LONG_EN = 3;
 
     /**
+     * @var MarkdownExtra $markdown
+     */
+    protected static $markdown;
+
+    /**
      * Converts markdown into HTML
      *
      * @param string $content
-     * @param array $config . Options to configure MarkdownExtra and smarty
+     * @param array  $config . Options to configure MarkdownExtra and smarty
      * - markdown: array for MarkdownExtra configuration parameters
      * - smarty: array for SmartyPantsTypographer configuration parameters
      * - custom: array for Custom configuration parameters
-     * @param int $smartyMode the SmartyPantsTypographer processing mode
+     * @param int    $smartyMode the SmartyPantsTypographer processing mode
+     *
      * @return string
      * @throws InvalidConfigException if module not set
      */
@@ -76,7 +77,8 @@ class Markdown
      * Converts markdown into HTML
      *
      * @param string $content
-     * @param array $config
+     * @param array  $config
+     *
      * @return string
      */
     public static function process($content, $config = [])
@@ -94,7 +96,8 @@ class Markdown
      * Custom conversion of patterns
      *
      * @param string $content
-     * @param array $config . List of key value pairs to find and replace
+     * @param array  $config . List of key value pairs to find and replace
+     *
      * @return string
      */
     public static function customProcess($content, $config = [])

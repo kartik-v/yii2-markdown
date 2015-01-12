@@ -1,9 +1,10 @@
 <?php
 
 /**
+ * @package   yii2-markdown
+ * @author    Kartik Visweswaran <kartikv2@gmail.com>
  * @copyright Copyright &copy; Kartik Visweswaran, Krajee.com, 2014
- * @package yii2-markdown
- * @version 1.2.0
+ * @version   1.3.0
  */
 
 namespace kartik\markdown\controllers;
@@ -15,7 +16,6 @@ use kartik\markdown\Markdown;
 
 class ParseController extends \yii\web\Controller
 {
-
     /**
      * Convert markdown text to HTML for preview
      *
@@ -59,5 +59,4 @@ class ParseController extends \yii\web\Controller
                  ->set('Content-Disposition', 'attachment; filename="' . $name . '.' . $type . '"')
                  ->set('Content-type', $mime . '; charset=utf-8');
     }
-
 }

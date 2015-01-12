@@ -1,8 +1,9 @@
 <?php
 /**
+ * @package   yii2-markdown
+ * @author    Kartik Visweswaran <kartikv2@gmail.com>
  * @copyright Copyright &copy; Kartik Visweswaran, Krajee.com, 2014
- * @package yii2-markdown
- * @version 1.2.0
+ * @version   1.3.0
  */
 
 use yii\helpers\Html;
