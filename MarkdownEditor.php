@@ -14,7 +14,6 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\helpers\Json;
 use yii\helpers\ArrayHelper;
-use yii\base\InvalidConfigException;
 use yii\web\View;
 
 /**
@@ -27,7 +26,8 @@ use yii\web\View;
  */
 class MarkdownEditor extends \yii\widgets\InputWidget
 {
-
+    use ModuleTrait;
+    
     /**
      * Header toolbar button constants
      */
@@ -252,10 +252,13 @@ EOT;
     public $bootstrapCssFile = 'http://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css';
 
     /**
-     * @var Module
+     * @var Module the markdown module
      */
     private $_module;
 
+    /**
+     * @var string the iframe identifier
+     */
     private $_iframeId;
 
     /**
@@ -264,10 +267,7 @@ EOT;
     public function init()
     {
         parent::init();
-        $this->_module = Yii::$app->getModule('markdown');
-        if ($this->_module === null) {
-            throw new InvalidConfigException("The module 'markdown' was not found. Ensure you have setup the 'markdown' module in your Yii configuration file.");
-        }
+        $this->initModule();
         $this->generateId();
         $this->generateMessages();
         $this->registerAssets();

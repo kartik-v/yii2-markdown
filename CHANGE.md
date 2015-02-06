@@ -1,3 +1,9 @@
+version 1.3.1
+=============
+*Date:* 06-Feb-2015
+
+- (enh #34): Allow markdown to be used as a sub-module.
+
 version 1.3.0
 =============
 *Date:* 12-Jan-2015

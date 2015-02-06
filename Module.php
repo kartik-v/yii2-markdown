@@ -19,6 +19,8 @@ use Yii;
  */
 class Module extends \kartik\base\Module
 {
+    const MODULE = 'markdown';
+
     /**
      * @var string the controller action route used
      * for markdown editor preview
