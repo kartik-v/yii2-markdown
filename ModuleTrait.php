@@ -31,8 +31,8 @@ trait ModuleTrait
     {
         $m = Module::MODULE;
         $this->_module = Config::fetchModule($m);
-        if ($this->_module === null) {
-            throw new InvalidConfigException("The module '{$m}' was not found. Ensure you have setup the '{$m}' module in your Yii configuration file.");
+        if ($this->_module === null || !$this->_module instanceof \kartik\markdown\Module) {
+            throw new InvalidConfigException("The '{$m}' module MUST be setup in your Yii configuration file and must be an instance of '\kartik\markdown\Module'");
         }
     }
 }
