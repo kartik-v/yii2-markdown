@@ -4,7 +4,7 @@
  * @package   yii2-markdown
  * @author    Kartik Visweswaran <kartikv2@gmail.com>
  * @copyright Copyright &copy; Kartik Visweswaran, Krajee.com, 2014
- * @version   1.7.4
+ * @version   1.3.1
  */
 
 namespace kartik\markdown;
@@ -16,7 +16,7 @@ use yii\base\InvalidConfigException;
  * Trait used for module validation
  *
  * @author Kartik Visweswaran <kartikv2@gmail.com>
- * @since 1.6.0
+ * @since 1.3.1
  */
 trait ModuleTrait
 {
