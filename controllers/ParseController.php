@@ -4,7 +4,7 @@
  * @package   yii2-markdown
  * @author    Kartik Visweswaran <kartikv2@gmail.com>
  * @copyright Copyright &copy; Kartik Visweswaran, Krajee.com, 2014
- * @version   1.3.0
+ * @version   1.3.1
  */
 
 namespace kartik\markdown\controllers;
