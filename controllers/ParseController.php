@@ -12,6 +12,8 @@ namespace kartik\markdown\controllers;
 use Yii;
 use yii\helpers\HtmlPurifier;
 use yii\helpers\Json;
+use kartik\base\Config;
+use kartik\markdown\Module;
 use kartik\markdown\Markdown;
 
 class ParseController extends \yii\web\Controller
@@ -24,7 +26,7 @@ class ParseController extends \yii\web\Controller
     public function actionPreview()
     {
         $output = '';
-        $module = Yii::$app->controller->module;
+        $module = Config::getModule(Module::MODULE);
         if (isset($_POST['source'])) {
             $output = (strlen($_POST['source']) > 0) ? Markdown::convert($_POST['source'], ['custom' => $module->customConversion]) : $_POST['nullMsg'];
         }

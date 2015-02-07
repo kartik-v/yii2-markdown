@@ -15,6 +15,7 @@ use yii\helpers\Url;
 use yii\helpers\Json;
 use yii\helpers\ArrayHelper;
 use yii\web\View;
+use kartik\base\Config;
 
 /**
  * A Markdown editor that implements PHP Markdown extra and PHP SmartyPantsTypographer
@@ -25,9 +26,7 @@ use yii\web\View;
  * @since 1.0
  */
 class MarkdownEditor extends \yii\widgets\InputWidget
-{
-    use ModuleTrait;
-    
+{   
     /**
      * Header toolbar button constants
      */
@@ -267,7 +266,7 @@ EOT;
     public function init()
     {
         parent::init();
-        $this->initModule();
+        $this->_module = Config::initModule(Module::classname());
         $this->generateId();
         $this->generateMessages();
         $this->registerAssets();

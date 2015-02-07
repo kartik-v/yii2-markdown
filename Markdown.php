@@ -9,6 +9,7 @@
 
 namespace kartik\markdown;
 
+use kartik\base\Config;
 use \Michelf\MarkdownExtra;
 use \Michelf\SmartyPantsTypographer;
 use yii\base\InvalidConfigException;
@@ -51,10 +52,7 @@ class Markdown
      */
     public static function convert($content, $config = [], $smartyMode = self::SMARTYPANTS_ATTR_LONG_EM_DASH_SHORT_EN)
     {
-        $module = \Yii::$app->getModule('markdown');
-        if ($module === null) {
-            throw new InvalidConfigException("The module 'markdown' was not found. Ensure you have setup the 'markdown' module in your Yii configuration file.");
-        }
+        $module = Config::initModule(Module::classname());
         $output = $content;
         if (strlen($output) > 0) {
             $mdConfig = empty($config['markdown']) ? [] : $config['markdown'];
