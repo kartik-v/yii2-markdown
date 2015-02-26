@@ -9,10 +9,10 @@
  *
  * Depends on jQuery 1.0 or later.
  *
- * Copyright 2014, Tim Down
+ * Copyright 2015, Tim Down
  * Licensed under the MIT license.
  * Version: 1.1.2
- * Build date: 6 September 2014
+ * Build date: 6 September 2015
  */
 (function ($) {
     var UNDEF = "undefined";

@@ -1,8 +1,9 @@
 version 1.3.1
 =============
-*Date:* 06-Feb-2015
+*Date:* 13-Feb-2015
 
 - (enh #34): Allow markdown to be used as a sub-module.
+- Set copyright year to current.
 
 version 1.3.0
 =============

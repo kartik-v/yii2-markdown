@@ -3,7 +3,7 @@
 /**
  * @package   yii2-markdown
  * @author    Kartik Visweswaran <kartikv2@gmail.com>
- * @copyright Copyright &copy; Kartik Visweswaran, Krajee.com, 2014
+ * @copyright Copyright &copy; Kartik Visweswaran, Krajee.com, 2015
  * @version   1.3.1
  */
 

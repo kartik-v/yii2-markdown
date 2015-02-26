@@ -3,7 +3,7 @@
 /**
  * @package   yii2-markdown
  * @author    Kartik Visweswaran <kartikv2@gmail.com>
- * @copyright Copyright &copy; Kartik Visweswaran, Krajee.com, 2014
+ * @copyright Copyright &copy; Kartik Visweswaran, Krajee.com, 2015
  * @version   1.3.1
  */
 
@@ -42,9 +42,9 @@ class Markdown
      *
      * @param string $content
      * @param array  $config . Options to configure MarkdownExtra and smarty
-     * - markdown: array for MarkdownExtra configuration parameters
-     * - smarty: array for SmartyPantsTypographer configuration parameters
-     * - custom: array for Custom configuration parameters
+     *  - markdown: array for MarkdownExtra configuration parameters
+     *  - smarty: array for SmartyPantsTypographer configuration parameters
+     *  - custom: array for Custom configuration parameters
      * @param int    $smartyMode the SmartyPantsTypographer processing mode
      *
      * @return string
