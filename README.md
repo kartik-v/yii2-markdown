@@ -1,11 +1,11 @@
 yii2-markdown
 =============
 
-[![Latest Stable Version](https://poser.pugx.org/kartik-v/yii2-markdown/v/stable.svg)](https://packagist.org/packages/kartik-v/yii2-markdown)
-[![License](https://poser.pugx.org/kartik-v/yii2-markdown/license.svg)](https://packagist.org/packages/kartik-v/yii2-markdown)
-[![Total Downloads](https://poser.pugx.org/kartik-v/yii2-markdown/downloads.svg)](https://packagist.org/packages/kartik-v/yii2-markdown)
-[![Monthly Downloads](https://poser.pugx.org/kartik-v/yii2-markdown/d/monthly.png)](https://packagist.org/packages/kartik-v/yii2-markdown)
-[![Daily Downloads](https://poser.pugx.org/kartik-v/yii2-markdown/d/daily.png)](https://packagist.org/packages/kartik-v/yii2-markdown)
+[![Latest Stable Version](https://poser.pugx.org/kartik-v/yii2-markdown/v/stable)](https://packagist.org/packages/kartik-v/yii2-markdown)
+[![License](https://poser.pugx.org/kartik-v/yii2-markdown/license)](https://packagist.org/packages/kartik-v/yii2-markdown)
+[![Total Downloads](https://poser.pugx.org/kartik-v/yii2-markdown/downloads)](https://packagist.org/packages/kartik-v/yii2-markdown)
+[![Monthly Downloads](https://poser.pugx.org/kartik-v/yii2-markdown/d/monthly)](https://packagist.org/packages/kartik-v/yii2-markdown)
+[![Daily Downloads](https://poser.pugx.org/kartik-v/yii2-markdown/d/daily)](https://packagist.org/packages/kartik-v/yii2-markdown)
 
 This module provides Markdown Editing and Conversion utilities for Yii Framework 2.0. It implements markdown conversion using PHP Markdown Extra and PHP Smarty Pants. In addition, you can customize the flavor of Markdown, by including additional custom conversion patterns. The module also includes an enhanced customized Markdown Editor Widget for markdown editing and preview at runtime. This widget is styled using Bootstrap 3.0. View a [complete demo](http://demos.krajee.com/markdown-demo).
 
