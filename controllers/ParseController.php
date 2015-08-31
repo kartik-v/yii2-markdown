@@ -30,6 +30,15 @@ class ParseController extends \yii\web\Controller
         if (isset($_POST['source'])) {
             $output = (strlen($_POST['source']) > 0) ? Markdown::convert($_POST['source'], ['custom' => $module->customConversion]) : $_POST['nullMsg'];
         }
+        if(isset($_POST['smarty']) && $_POST['smarty'] && ((is_bool($module->smarty) && $module->smarty)  || ((is_string($module->smarty) || is_callable($module->smarty) ) && call_user_func($module->smarty,$module))  )  ) {
+            $smarty = new \Smarty();
+            $smarty->config_vars = Yii::$app->params;
+            if($module->smartyYiiApp)
+                $smarty->assign('app', Yii::$app);
+            if($module->smartyYiiParams)
+                $smarty->assign('this', $this);
+            $output = $smarty->fetch('string:'.$output, null, null, $module->smartyParams);
+        }
         echo Json::encode(HtmlPurifier::process($output));
     }
 
