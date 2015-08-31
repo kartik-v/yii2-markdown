@@ -119,6 +119,56 @@ echo MarkdownEditor::widget([
 ]);
 ```
 
+
+### Smarty Templates
+Smarty templates can be enabled by setting the module params
+```php
+'modules' = [
+	'markdown' => [
+	     'class' => 'kartik\markdown\Module',
+	     'smarty' => true,
+	     // Smarty class configuration
+	     'smartParams' => [],
+	     // provide Yii::$app to the Smarty template as variable
+	     'smartyYiiApp' => true,
+	     // provide Yii::$app->params to the Smarty template as config variables
+	     'smartyYiiParams' => true,
+	],
+        /* other modules */
+];
+```
+Then define smarty in the editor
+```php
+echo MarkdownEditor::widget([
+    'model' => $model, 
+    'attribute' => 'markdown',
+    'smarty' => true,
+]);
+```
+You can set the module property smarty to a callable function and provide RBAC features
+```php
+'modules' = [
+	'markdown' => [
+		'class' => 'kartik\markdown\Module',
+		'smarty' => function($module) {
+			if (\Yii::$app->user->can('smarty')) {
+			    if(\Yii::$app->user->can('smartyYiiApp'))
+			        $module->smartyYiiApp=true;
+			    else
+			        $module->smartyYiiApp=false;
+			    if(\Yii::$app->user->can('smartyYiiParams'))
+			        $module->smartyYiiParams=true;
+			    else
+			        $module->smartyYiiParams=false;
+			    return true;
+			}
+			return false;
+		}
+	],
+        /* other modules */
+];
+```
+
 ## License
 
 **yii2-markdown** is released under the BSD 3-Clause License. See the bundled `LICENSE.md` for details.
