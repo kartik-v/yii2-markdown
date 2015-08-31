@@ -88,6 +88,7 @@ function togglePreview(params) {
             dataType: "json",
             data: {
                 source: $(source).val(),
+                smarty: params.smarty,
                 nullMsg: nullMsg
             },
             beforeSend: function () {
