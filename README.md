@@ -121,14 +121,14 @@ echo MarkdownEditor::widget([
 
 
 ### Smarty Templates
-Smarty templates can be enabled by setting the module params
+Smarty templates can be enabled globally by setting the module params
 ```php
 'modules' = [
 	'markdown' => [
 	     'class' => 'kartik\markdown\Module',
 	     'smarty' => true,
 	     // Smarty class configuration
-	     'smartParams' => [],
+	     'smartyParams' => [],
 	     // provide Yii::$app to the Smarty template as variable
 	     'smartyYiiApp' => true,
 	     // provide Yii::$app->params to the Smarty template as config variables
@@ -145,7 +145,7 @@ echo MarkdownEditor::widget([
     'smarty' => true,
 ]);
 ```
-You can set the module property smarty to a callable function and provide RBAC features
+Note that it may be unwise to enable Smarty templates globally. You can set the module property smarty to a callable function and provide RBAC features.
 ```php
 'modules' = [
 	'markdown' => [
@@ -167,6 +167,40 @@ You can set the module property smarty to a callable function and provide RBAC f
 	],
         /* other modules */
 ];
+```
+It may be a better option to leave smarty turned off in the config files and turn it on in the view with the widget settings.
+```php
+echo MarkdownEditor::widget([
+    'model' => $model, 
+    'attribute' => 'markdown',
+    'smarty' => true,
+    'previewAction' => Url::to(['my/preview']),
+]);
+```
+Then create an action in your controller and implement RBAC there. That way Smarty templates is off by default and you can
+turn it on and control access to it in the Controller.
+```php
+class MyController extends Controller
+{
+    public function actionPreview()
+    {
+        $module = Yii::$app->getModule('markdown');
+        if (\Yii::$app->user->can('smarty')) {
+            $module->smarty = true;
+            $module->smartyYiiApp = \Yii::$app->user->can('smartyYiiApp') ? true : false;
+            $module->smartyYiiParams = Yii::$app->user->can('smartyYiiParams') ? true : false;
+        }
+        if (isset($_POST['source'])) {
+            $output = (strlen($_POST['source']) > 0) ? Markdown::convert($_POST['source'], ['custom' => $module->customConversion]) : $_POST['nullMsg'];
+        }
+        echo Json::encode(HtmlPurifier::process($output));
+    }
+}
+```
+After saving the value to the database you can render it in your views with Markdown::convert(). For example if you save the Markdown field in the content column of the Post table you can use something like the following.
+```php
+$content = Post::find(['page_id'=>'myPage'])->one()->content;
+echo HtmlPurifier::process(Markdown::convert($content, ['custom' => $module->customConversion]))
 ```
 
 ## License
