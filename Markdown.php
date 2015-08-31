@@ -67,6 +67,14 @@ class Markdown
                 $cuConfig = empty($config['custom']) ? $module->customConversion : $config['custom'];
                 $output = static::customProcess($output, $cuConfig);
             }
+            if ( (is_bool($module->smarty) && $module->smarty)  || ((is_string($module->smarty) || is_callable($module->smarty)) && call_user_func($module->smarty,$module))  ) {
+                $smarty = new \Smarty();
+                if($module->smartyYiiApp)
+                    $smarty->assign('app', Yii::$app);
+                if($module->smartyYiiParams)
+                    $smarty->config_vars = Yii::$app->params;
+                $output = $smarty->fetch('string:'.$output, null, null, $module->smartyParams);
+            }
         }
         return $output;
     }
