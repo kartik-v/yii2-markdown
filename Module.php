@@ -45,7 +45,7 @@ class Module extends \kartik\base\Module
     /**
      * @var boolean|callable turn smarty temlates on/off. Can be a callable function with the $module passed as a parameter.
      */
-    public $smarty = true;
+    public $smarty = false;
     
     /**
      * @var array|null Smarty class configuration params
@@ -55,12 +55,12 @@ class Module extends \kartik\base\Module
     /**
      * @var boolean wether to add Yii::$app as a variable for Smarty templates.
      */
-    public $smartyYiiApp = true;
+    public $smartyYiiApp = false;
     
     /**
      * @var boolean whether to add Yii::$app->params as smarty configs accessable via {#paramName#} in the editor
      */
-    public $smartyYiiParams = true;
+    public $smartyYiiParams = false;
 
     /**
      * @var boolean whether to use PHP SmartyPants
