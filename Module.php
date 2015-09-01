@@ -41,6 +41,26 @@ class Module extends \kartik\base\Module
     public $customConversion = [
         '<table>' => '<table class="table table-bordered table-striped">'
     ];
+    
+    /**
+     * @var boolean|callable turn smarty temlates on/off. Can be a callable function with the $module passed as a parameter.
+     */
+    public $smarty = true;
+    
+    /**
+     * @var array|null Smarty class configuration params
+     */
+    public $smartyParams;
+    
+    /**
+     * @var boolean wether to add Yii::$app as a variable for Smarty templates.
+     */
+    public $smartyYiiApp = true;
+    
+    /**
+     * @var boolean whether to add Yii::$app->params as smarty configs accessable via {#paramName#} in the editor
+     */
+    public $smartyYiiParams = true;
 
     /**
      * @var boolean whether to use PHP SmartyPants

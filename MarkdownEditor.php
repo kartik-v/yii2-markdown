@@ -243,6 +243,16 @@ EOT;
      * @var boolean show the preview button - defaults to true
      */
     public $showPreview = true;
+    
+    /**
+     * @var string|null set custom action to use for preview
+     */
+    public $previewAction;
+    
+    /**
+     * @var boolean use Smarty templates
+     */
+    public $smarty = true;
 
     /**
      * @var string the bootstrap CSS file on CDN which
@@ -507,7 +517,8 @@ EOT;
             'preview' => '#' . $this->getButtonId(self::BTN_PREVIEW),
             'progress' => $this->previewProgress,
             'maximize' => '#' . $this->getButtonId(self::BTN_MAXIMIZE),
-            'url' => Url::toRoute($this->_module->previewAction),
+            'url' => Url::toRoute($this->previewAction !== null ? $this->previewAction : $this->_module->previewAction),
+            'smarty' => $this->smarty,
             'export1' => '#' . $this->getButtonId(self::BTN_EXPORT_1),
             'export2' => '#' . $this->getButtonId(self::BTN_EXPORT_2),
             'nullMsg' => Yii::t('kvmarkdown', $this->emptyPreview),

@@ -88,6 +88,7 @@ function togglePreview(params) {
             dataType: "json",
             data: {
                 source: $(source).val(),
+                smarty: params.smarty,
                 nullMsg: nullMsg
             },
             beforeSend: function () {
@@ -306,7 +307,7 @@ function markUp(btn, source) {
     }
 }
 
-function toggleScreen(btn, container, editor, modal, preview, defHeight) {
+function toggleScreen(btn, container, editor, modal, preview, defHeight, fullscreen) {
     h = $(window).height();
     if ($(btn).hasClass('active')) {
         $(btn).removeClass('active')
@@ -316,7 +317,7 @@ function toggleScreen(btn, container, editor, modal, preview, defHeight) {
         $(modal + ' ' + editor).clone(true).appendTo(container);
         $(container + ' textarea').val(val)
         $(modal + ' ' + editor).remove();
-        $('.kv-fullscreen').modal("hide");
+        $('.'+fullscreen).modal("hide");
     } else {
         $(btn).addClass('active')
         val = $(container + ' textarea').val()
@@ -325,7 +326,7 @@ function toggleScreen(btn, container, editor, modal, preview, defHeight) {
         $(modal + ' textarea').height(0.75 * h);
         $(modal + ' ' + preview).css('max-height', 0.75 * h);
         $(modal + ' textarea').val(val)
-        $('.kv-fullscreen').modal("show")
+        $('.'+fullscreen).modal("show")
     }
 }
 
@@ -341,7 +342,8 @@ function initEditor(params) {
         export2 = params.export2,
         defHeight = params.height,
         $iframe = $('#' + params.iframeId),
-        $form = $iframe.contents().find('form');
+        $form = $iframe.contents().find('form'),
+        fullscreen = input.slice(1) + '-fullscreen';
     filename = params.filename;
 
     $(input).focus(function () {
@@ -364,14 +366,14 @@ function initEditor(params) {
         genExportFile($form, filename, params.exportCss, params.exportMeta, params.exportHeader, $(input).val(), 'HTML', params.exportHtml, params.url, params.nullMsg);
     });
 
-    $('body').remove('.kv-fullscreen');
-    $('body').append('<div class="modal fade kv-fullscreen" data-backdrop="static" data-keyboard=false><div class="modal-dialog"><div  id="' + modal + '" class="modal-content"></div></div></div>')
+    $('body').remove('.' + fullscreen);
+    $('body').append('<div class="modal fade '+fullscreen+' kv-fullscreen" data-backdrop="static" data-keyboard=false><div class="modal-dialog"><div  id="' + modal + '" class="modal-content"></div></div></div>')
     modal = '#' + modal
 
     $(editor + ' ' + target).css('max-height', defHeight)
     $(editor + ' textarea').height(defHeight)
 
     $(maximize).click(function () {
-        toggleScreen(maximize, container, editor, modal, target, defHeight);
+        toggleScreen(maximize, container, editor, modal, target, defHeight, fullscreen);
     });
 }
