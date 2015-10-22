@@ -11,12 +11,12 @@ namespace kartik\markdown;
 
 use kartik\base\Config;
 use \Michelf\MarkdownExtra;
-use \Michelf\SmartyPantsTypographer;
+use \Michelf\SmartyPants;
 use yii\base\InvalidConfigException;
 
 /**
  * Markdown provides concrete implementation for PHP Markdown Extra
- * and PHP SmartyPantsTypographer.
+ * and PHP SmartyPants.
  *
  * @author Kartik Visweswaran <kartikv2@gmail.com>
  * @since 1.0
@@ -59,7 +59,7 @@ class Markdown
             $output = static::process($content, $mdConfig);
             if ($module->smartyPants) {
                 $smConfig = empty($config['smarty']) ? [] : $config['smarty'];
-                $smarty = new SmartyPantsTypographer($smartyMode);
+                $smarty = new SmartyPants($smartyMode);
                 foreach ($smConfig as $name => $value) {
                     $smarty->{$name} = $value;
                 }
