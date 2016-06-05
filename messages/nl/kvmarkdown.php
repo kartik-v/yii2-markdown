@@ -27,7 +27,7 @@ return [
     'CTRL-Z' => 'CTRL-Z',
     'CTRL-Y' => 'CTRL-Y',
     'Definition List' => 'Definitielijst',
-    'Disable any popup blockers in your browser to ensure proper download.' => 'Schakel de pop-up blocker van uw browser uit om een correcte download the garanderen.',
+    'Disable any popup blockers in your browser to ensure proper download.' => 'Schakel de pop-up blockers van uw browser uit om een correcte download the garanderen.',
     'Footnote' => 'Voetnoot',
     'HTML' => 'HTML',
     'Heading' => 'Titel',
