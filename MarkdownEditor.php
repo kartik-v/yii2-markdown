@@ -534,7 +534,7 @@ EOT;
         // Move iframe at the end of the body
         $view->registerJs('jQuery("body").append(jQuery("#' . $this->_iframeId . '"));');
         // Initialize markdown editor after iframe is loaded
-        $js = 'jQuery(window).load(function(){initEditor(' . Json::encode($params) . ')});';
+        $js = 'jQuery(window).on("load", function(){initEditor(' . Json::encode($params) . ')});';
         $view->registerJs($js);
     }
 
