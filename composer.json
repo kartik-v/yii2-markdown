@@ -4,7 +4,7 @@
     "keywords": ["yii", "yii2", "extension", "markdown", "editor", "converter", "input", "form", "bootstrap", "jquery"],
     "homepage": "https://github.com/kartik-v/yii2-markdown",
     "type": "yii2-extension",
-    "license": "BSD 3-Clause",
+    "license": "BSD-3-Clause",
     "authors": [
         {
             "name": "Kartik Visweswaran",
