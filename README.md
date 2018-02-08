@@ -58,7 +58,7 @@ to the ```require``` section of your `composer.json` file.
 ### Setup Module
 Add `markdown` to your modules section of your Yii configuration file
 ```php
-'modules' = [
+'modules' => [
 	/* other modules */
 	'markdown' => [
 		'class' => 'kartik\markdown\Module',
@@ -67,7 +67,7 @@ Add `markdown` to your modules section of your Yii configuration file
 ```
 You can setup additional configuration options for the `markdown` module:
 ```php
-'modules' = [
+'modules' => [
 	'markdown' => [
 		// the module class
 		'class' => 'kartik\markdown\Module',
@@ -124,7 +124,7 @@ echo MarkdownEditor::widget([
 ### Smarty Templates
 Smarty templates can be enabled globally by setting the module params
 ```php
-'modules' = [
+'modules' => [
 	'markdown' => [
 	     'class' => 'kartik\markdown\Module',
 	     'smarty' => true,
@@ -148,7 +148,7 @@ echo MarkdownEditor::widget([
 ```
 Note that it may be unwise to enable Smarty templates globally. You can set the module property smarty to a callable function and provide RBAC features.
 ```php
-'modules' = [
+'modules' => [
 	'markdown' => [
 		'class' => 'kartik\markdown\Module',
 		'smarty' => function($module) {
