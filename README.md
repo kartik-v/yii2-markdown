@@ -120,7 +120,6 @@ echo MarkdownEditor::widget([
 ]);
 ```
 
-
 ### Smarty Templates
 Smarty templates can be enabled globally by setting the module params
 ```php
