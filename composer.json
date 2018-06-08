@@ -16,7 +16,7 @@
     "require": {
         "kartik-v/yii2-krajee-base": "*",
         "michelf/php-markdown": "*",
-        "michelf/php-smartypants": "*"
+        "michelf/php-smartypants": "dev-lib"
     },
     "autoload": {
         "psr-4": {
