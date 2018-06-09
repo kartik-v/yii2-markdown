@@ -94,9 +94,9 @@
                     link = prompt('Insert Hyperlink', 'http://')
                     return (link != null && link != '' && link != 'http://') ? '[' + txt + '](' + link + ')' : txt;
                 case 6:  // Image
-                    link = prompt('Insert Image Hyperlink', 'http://')
                     var title = prompt('Image title', 'enter image title here')
-                    return (link != null && link != '' && link != 'http://') ? '![' + txt + '](' + link + ' ' + title + ')' : txt;
+                    link = prompt('Insert Image Hyperlink', 'http://')
+                    return (link != null && link != '' && link != 'http://') ? '![' + txt + '](' + link + ' "' + title + '")' : txt;
                 case 7:  // Add Indent
                     if (str.indexOf('\n') < 0) {
                         str = ind + str
