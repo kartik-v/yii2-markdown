@@ -88,11 +88,15 @@
                 case 4:  // New Line
                     return $h.getBlockMarkUp(txt, '', '  ');
                 case 5:  // Hyperlink
+                    if (txt == '') {
+                        txt = prompt('Insert title', '')
+                    }
                     link = prompt('Insert Hyperlink', 'http://')
                     return (link != null && link != '' && link != 'http://') ? '[' + txt + '](' + link + ')' : txt;
                 case 6:  // Image
                     link = prompt('Insert Image Hyperlink', 'http://')
-                    return (link != null && link != '' && link != 'http://') ? '![' + txt + '](' + link + ' "enter image title here")' : txt;
+                    var title = prompt('Image title', 'enter image title here')
+                    return (link != null && link != '' && link != 'http://') ? '![' + txt + '](' + link + ' ' + title + ')' : txt;
                 case 7:  // Add Indent
                     if (str.indexOf('\n') < 0) {
                         str = ind + str
