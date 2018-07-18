@@ -29,7 +29,7 @@ return [
     'Footnote' => 'Poznámka pod čarou',
     'HTML' => 'HTML',
     'Heading' => 'Nadpis',
-    'Heading {n} Style' => 'Nadpis {n}. řádu',
+    'Heading {n} Style' => 'Nadpis {n}. úrovně',
     'Horizontal Line' => 'Vodorovná čára',
     'Image' => 'Obrázek',
     'Indent Text' => 'Zarovnání textu',
