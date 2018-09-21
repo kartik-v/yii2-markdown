@@ -13,7 +13,7 @@
         }
     ],
     "require": {
-        "kartik-v/yii2-krajee-base": "~1.8",
+        "kartik-v/yii2-krajee-base": ">=1.9",
         "michelf/php-markdown": "~1.8",
         "michelf/php-smartypants": "~1.8"
     },

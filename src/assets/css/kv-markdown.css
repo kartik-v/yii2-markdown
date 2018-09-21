@@ -9,6 +9,10 @@
  * Year: 2015
  * For more Yii related demos visit http://demos.krajee.com
  */
+.kv-md-editor .hidden {
+    display: none;
+}
+
 .kv-md-editor {
     display: block;
     border: 1px solid #ddd;

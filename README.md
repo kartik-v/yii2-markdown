@@ -1,7 +1,8 @@
 yii2-markdown
 =============
 
-[![Latest Stable Version](https://poser.pugx.org/kartik-v/yii2-markdown/v/stable)](https://packagist.org/packages/kartik-v/yii2-markdown)
+[![Stable Version](https://poser.pugx.org/kartik-v/yii2-markdown/v/stable)](https://packagist.org/packages/kartik-v/yii2-markdown)
+[![Unstable Version](https://poser.pugx.org/kartik-v/yii2-markdown/v/unstable)](https://packagist.org/packages/kartik-v/yii2-markdown)[![License](https://poser.pugx.org/kartik-v/yii2-markdown/license)](https://packagist.org/packages/kartik-v/yii2-markdown)
 [![License](https://poser.pugx.org/kartik-v/yii2-markdown/license)](https://packagist.org/packages/kartik-v/yii2-markdown)
 [![Total Downloads](https://poser.pugx.org/kartik-v/yii2-markdown/downloads)](https://packagist.org/packages/kartik-v/yii2-markdown)
 [![Monthly Downloads](https://poser.pugx.org/kartik-v/yii2-markdown/d/monthly)](https://packagist.org/packages/kartik-v/yii2-markdown)

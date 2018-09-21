@@ -27,7 +27,7 @@ use kartik\base\InputWidget;
  * @since 1.0
  */
 class MarkdownEditor extends InputWidget
-{   
+{
     /**
      * Header toolbar button constants
      */
@@ -146,7 +146,7 @@ EOT;
      * @var array the HTML attributes for all toolbar buttons
      * used in the header and footer
      */
-    public $buttonOptions = ['class' => 'btn btn-sm btn-default'];
+    public $buttonOptions = [];
 
     /**
      * @var array the HTML attributes for the container holding all
@@ -160,7 +160,7 @@ EOT;
      * - {buttons}: array the configuration for footer toolbar buttons (see function [[setDefaultFooter()]])
      * - {message}: array the footer help message displayed (see [[footerMessage]])
      */
-    public $footer = '<div class = "btn-toolbar pull-right">{buttons}</div><div class="kv-md-hint">{message}</div><div class="clearfix"></div>';
+    public $footer = '<div class = "btn-toolbar pull-right float-right">{buttons}</div><div class="kv-md-hint">{message}</div><div class="clearfix"></div>';
 
     /**
      * @var array the footer toolbar configuration. List of button groups
@@ -198,13 +198,13 @@ EOT;
     public $previewProgress;
 
     /**
-     * @var string Deprecated and not used since v1.3.1. 
+     * @var string Deprecated and not used since v1.3.1.
      * (originally alert message displayed before saving output as Text)
      */
     public $exportTextAlert;
 
     /**
-     * @var string Deprecated and not used since v1.3.1. 
+     * @var string Deprecated and not used since v1.3.1.
      * (originally alert message displayed before saving output as HTML)
      */
     public $exportHtmlAlert;
@@ -244,12 +244,12 @@ EOT;
      * @var boolean show the preview button - defaults to true
      */
     public $showPreview = true;
-    
+
     /**
      * @var string|null set custom action to use for preview
      */
     public $previewAction;
-    
+
     /**
      * @var boolean use Smarty templates
      */
@@ -272,7 +272,13 @@ EOT;
     public function init()
     {
         parent::init();
+        if (!isset($this->buttonOptions['class'])) {
+            $this->buttonOptions['class'] = 'btn ' . $this->getDefaultBtnCss();
+        }
         $this->_module = Config::initModule(Module::classname());
+        if (!isset($this->bsVersion) && isset($this->_module->bsVersion)) {
+            $this->bsVersion = $this->_module->bsVersion;
+        }
         $this->generateId();
         $this->generateMessages();
         $this->registerAssets();
@@ -339,7 +345,7 @@ EOT;
     {
         $groupOptions = empty($group['options']) ? [] : $group['options'];
         $groupOptions = array_replace($this->buttonGroupOptions, $groupOptions);
-        Html::addCssClass($groupOptions, 'btn-group');
+        Html::addCssClass($groupOptions, 'btn-group ml-1');
         $output = Html::beginTag('div', $groupOptions) . "\n";
         foreach ($group['buttons'] as $btn => $options) {
             if ($header) {
@@ -368,14 +374,15 @@ EOT;
         $label = ArrayHelper::remove($options, 'label', '');
         $encodeLabel = ArrayHelper::remove($options, 'encodeLabel', $this->encodeLabels);
         $options['type'] = 'button';
+        $prefix = $this->getDefaultIconPrefix();
         if (strlen(trim($icon)) > 0) {
-            $icon = "<i class='glyphicon glyphicon-{$icon}'></i>";
+            $icon = "<i class='{$prefix}{$icon}'></i>";
         }
         if (strlen(trim($label)) > 0) {
             $icon .= ' ';
         }
         $label = $icon . ($encodeLabel ? Html::encode($label) : $label);
-        $options = array_replace($this->buttonOptions, $options);
+        $options = array_replace_recursive($this->buttonOptions, $options);
         $options['title'] = empty($options['title']) ? '' : $options['title'];
         $options['id'] = $this->getButtonId($btn);
         $items = ArrayHelper::remove($options, 'items', []);
@@ -383,7 +390,9 @@ EOT;
         if (!empty($items)) {
             Html::addCssClass($options, 'dropdown-toggle');
             $options['data-toggle'] = 'dropdown';
-            $label = $label . ' <span class="caret"></span>';
+            if (!$this->isBs4()) {
+                $label .= ' <span class="caret"></span>';
+            }
         }
 
         if ($markup) {
@@ -395,13 +404,18 @@ EOT;
 
         if (!empty($items)) {
             $output .= "<ul class='dropdown-menu'>\n";
+            $prefix = $this->getDefaultIconPrefix();
             foreach ($items as $key => $item) {
                 if ($btn !== self::BTN_EXPORT) {
                     $item['options']['data-key'] = $key;
                     $item['options']['data-tool'] = 'md-button';
                 }
                 $item['options']['id'] = $this->getButtonId($key);
-                $icon = empty($item['icon']) ? '' : '<i class="glyphicon glyphicon-' . $item['icon'] . '"></i> ';
+
+                $icon = empty($item['icon']) ? '' : '<i class="' . $prefix . $item['icon'] . '"></i> ';
+                if ($this->isBs4()) {
+                    Html::addCssClass($item['options'], 'dropdown-item');
+                }
                 $output .= "<li>" . Html::a($icon . $item['label'], '#', $item['options']) . "</li>";
             }
             $output .= "</ul>\n";
@@ -418,17 +432,19 @@ EOT;
             $this->footerMessage = $this->getFooterMessage();
         }
         if (!isset($this->emptyPreview)) {
-            $this->emptyPreview = '<p class="help-block text-center">' . Yii::t('kvmarkdown', 'No content to display') . '</p>';
+            $this->emptyPreview = '<p class="help-block text-center">' . Yii::t('kvmarkdown',
+                    'No content to display') . '</p>';
         }
         if (empty($this->exportFileName)) {
             $this->exportFileName = Yii::t('kvmarkdown', 'markdown-export');
         }
         if (!isset($this->exportHeader)) {
-            $this->exportHeader = "> - - -\n> " . Yii::t('kvmarkdown', "Markdown Export{line} *Generated {date} by {class}", [
-                    'line' => "\n> ===============\n>",
-                    'date' => date("d-M-Y H:i"),
-                    'class' => "\\kartik\\markdown\\MarkdownEditor*\n> - - -\n\n"
-                ]);
+            $this->exportHeader = "> - - -\n> " . Yii::t('kvmarkdown',
+                    "Markdown Export{line} *Generated {date} by {class}", [
+                        'line' => "\n> ===============\n>",
+                        'date' => date("d-M-Y H:i"),
+                        'class' => "\\kartik\\markdown\\MarkdownEditor*\n> - - -\n\n",
+                    ]);
         }
         if (!isset($this->exportCss)) {
             $this->exportCss = Html::cssFile($this->bootstrapCssFile) .
@@ -440,7 +456,8 @@ EOT;
                 );
         }
         if (!isset($this->previewProgress)) {
-            $this->previewProgress = '<div class="kv-loading">' . Yii::t('kvmarkdown', 'Loading Preview') . ' &hellip;</div>';
+            $this->previewProgress = '<div class="kv-loading">' . Yii::t('kvmarkdown',
+                    'Loading Preview') . ' &hellip;</div>';
         }
     }
 
@@ -449,19 +466,22 @@ EOT;
      */
     protected function getFooterMessage()
     {
-        $bullet = '<i class="glyphicon glyphicon-arrow-right"></i>';
-        $link1 = '<a href="http://michelf.ca/projects/php-markdown/extra/" target="_blank">' . Yii::t('kvmarkdown', 'PHP Markdown Extra') . '</a>';
-        $link2 = '<a href="http://michelf.ca/projects/php-smartypants/typographer/" target="_blank">' . Yii::t('kvmarkdown', 'PHP SmartyPants Typographer') . '</a>';
+        $bullet = '<i class="' . $this->getDefaultIconPrefix() .  'arrow-right"></i>';
+        $link1 = '<a href="http://michelf.ca/projects/php-markdown/extra/" target="_blank">' . Yii::t('kvmarkdown',
+                'PHP Markdown Extra') . '</a>';
+        $link2 = '<a href="http://michelf.ca/projects/php-smartypants/typographer/" target="_blank">' . Yii::t('kvmarkdown',
+                'PHP SmartyPants Typographer') . '</a>';
         $link = $this->_module->smartyPants ? $link1 . ' ' . Yii::t('kvmarkdown', 'and') . ' ' . $link2 : $link1;
         $msg1 = Yii::t('kvmarkdown', '{bullet} You may use {link} syntax.', [
             'bullet' => $bullet,
-            'link' => $link
+            'link' => $link,
         ]);
         $keys = '<kbd>' . Yii::t('kvmarkdown', 'CTRL-Z') . '</kbd> / <kbd>' . Yii::t('kvmarkdown', 'CTRL-Y') . '</kbd>';
-        $msg2 = Yii::t('kvmarkdown', '{bullet} To undo / redo, press {keys}. You can also undo most button actions by clicking it again.', [
-            'bullet' => $bullet,
-            'keys' => $keys
-        ]);
+        $msg2 = Yii::t('kvmarkdown',
+            '{bullet} To undo / redo, press {keys}. You can also undo most button actions by clicking it again.', [
+                'bullet' => $bullet,
+                'keys' => $keys,
+            ]);
         return $msg1 . '<br>' . $msg2;
     }
 
@@ -472,8 +492,8 @@ EOT;
     {
         $view = $this->getView();
         MarkdownEditorAsset::register($view);
-        $previewAction = (array) ($this->previewAction !== null ? $this->previewAction : $this->_module->previewAction);
-        $downloadAction = (array) $this->_module->downloadAction;
+        $previewAction = (array)($this->previewAction !== null ? $this->previewAction : $this->_module->previewAction);
+        $downloadAction = (array)$this->_module->downloadAction;
         $this->pluginOptions += [
             'containerId' => $this->containerOptions['id'],
             'editorId' => $this->editorOptions['id'],
@@ -511,10 +531,11 @@ EOT;
                 'label' => Yii::t('kvmarkdown', 'Heading {n}', ['n' => $n]),
                 'options' => [
                     'class' => 'kv-heading-' . $n,
-                    'title' => Yii::t('kvmarkdown', 'Heading {n} Style', ['n' => $n])
-                ]
+                    'title' => Yii::t('kvmarkdown', 'Heading {n} Style', ['n' => $n]),
+                ],
             ];
         };
+        $isBs4 = $this->isBs4();
 
         $this->toolbar = [
             [
@@ -522,27 +543,34 @@ EOT;
                     self::BTN_BOLD => ['icon' => 'bold', 'title' => Yii::t('kvmarkdown', 'Bold')],
                     self::BTN_ITALIC => ['icon' => 'italic', 'title' => Yii::t('kvmarkdown', 'Italic')],
                     self::BTN_PARAGRAPH => ['icon' => 'font', 'title' => Yii::t('kvmarkdown', 'Paragraph')],
-                    self::BTN_NEW_LINE => ['icon' => 'text-height', 'title' => Yii::t('kvmarkdown', 'Append Line Break')],
-                    self::BTN_HEADING => ['icon' => 'header', 'title' => Yii::t('kvmarkdown', 'Heading'), 'items' => [
-                        self::BTN_H1 => $heading(1),
-                        self::BTN_H2 => $heading(2),
-                        self::BTN_H3 => $heading(3),
-                        self::BTN_H4 => $heading(4),
-                        self::BTN_H5 => $heading(5),
-                        self::BTN_H6 => $heading(6),
-                    ]],
+                    self::BTN_NEW_LINE => [
+                        'icon' => 'text-height',
+                        'title' => Yii::t('kvmarkdown', 'Append Line Break'),
+                    ],
+                    self::BTN_HEADING => [
+                        'icon' => $isBs4 ? 'heading' : 'header',
+                        'title' => Yii::t('kvmarkdown', 'Heading'),
+                        'items' => [
+                            self::BTN_H1 => $heading(1),
+                            self::BTN_H2 => $heading(2),
+                            self::BTN_H3 => $heading(3),
+                            self::BTN_H4 => $heading(4),
+                            self::BTN_H5 => $heading(5),
+                            self::BTN_H6 => $heading(6),
+                        ],
+                    ],
                 ],
             ],
             [
                 'buttons' => [
                     self::BTN_LINK => ['icon' => 'link', 'title' => Yii::t('kvmarkdown', 'URL/Link')],
-                    self::BTN_IMAGE => ['icon' => 'picture', 'title' => Yii::t('kvmarkdown', 'Image')],
+                    self::BTN_IMAGE => ['icon' => $isBs4 ? 'image' : 'picture', 'title' => Yii::t('kvmarkdown', 'Image')],
                 ],
             ],
             [
                 'buttons' => [
-                    self::BTN_INDENT_L => ['icon' => 'indent-left', 'title' => Yii::t('kvmarkdown', 'Indent Text')],
-                    self::BTN_INDENT_R => ['icon' => 'indent-right', 'title' => Yii::t('kvmarkdown', 'Unindent Text')],
+                    self::BTN_INDENT_L => ['icon' => $isBs4 ? 'outdent' : 'indent-left', 'title' => Yii::t('kvmarkdown', 'Indent Text')],
+                    self::BTN_INDENT_R => ['icon' => $isBs4 ? 'indent' : 'indent-right', 'title' => Yii::t('kvmarkdown', 'Unindent Text')],
                 ],
             ],
             [
@@ -560,20 +588,33 @@ EOT;
             ],
             [
                 'buttons' => [
-                    self::BTN_CODE => ['label' => self::ICON_CODE, 'title' => Yii::t('kvmarkdown', 'Inline Code'), 'encodeLabel' => false],
-                    self::BTN_CODE_BLOCK => ['icon' => 'sound-stereo', 'title' => Yii::t('kvmarkdown', 'Code Block')],
+                    self::BTN_CODE => [
+                        'label' => $isBs4 ? null : self::ICON_CODE,
+                        'icon' => $isBs4 ? 'code' : null,
+                        'title' => Yii::t('kvmarkdown', 'Inline Code'),
+                        'encodeLabel' => false,
+                    ],
+                    self::BTN_CODE_BLOCK => ['icon' => $isBs4 ? 'laptop-code' : 'sound-stereo', 'title' => Yii::t('kvmarkdown', 'Code Block')],
                 ],
             ],
             [
                 'buttons' => [
-                    self::BTN_HR => ['label' => self::ICON_HR, 'title' => Yii::t('kvmarkdown', 'Horizontal Line'), 'encodeLabel' => false],
+                    self::BTN_HR => [
+                        'icon' => 'minus',
+                        'title' => Yii::t('kvmarkdown', 'Horizontal Line'),
+                        'encodeLabel' => false,
+                    ],
                 ],
             ],
             [
                 'buttons' => [
-                    self::BTN_MAXIMIZE => ['icon' => 'fullscreen', 'title' => Yii::t('kvmarkdown', 'Toggle full screen'), 'data-enabled' => true]
+                    self::BTN_MAXIMIZE => [
+                        'icon' => $isBs4 ? 'expand-arrows-alt' : 'fullscreen',
+                        'title' => Yii::t('kvmarkdown', 'Toggle full screen'),
+                        'data-enabled' => true,
+                    ],
                 ],
-                'options' => ['class' => 'pull-right']
+                'options' => ['class' => 'pull-right float-right'],
             ],
         ];
     }
@@ -586,20 +627,39 @@ EOT;
         if (!empty($this->footerButtons)) {
             return;
         }
-
+        $isBs4 = $this->isBs4();
         $this->footerButtons = [
             [
                 'buttons' => [
-                    self::BTN_EXPORT => ['icon' => 'floppy-disk', 'label' => Yii::t('kvmarkdown', 'Export'), 'title' => Yii::t('kvmarkdown', 'Export content'), 'class' => 'btn btn-sm btn-primary', 'data-enabled' => true, 'items' => [
-                        self::BTN_EXPORT_1 => ['icon' => 'floppy-save', 'label' => Yii::t('kvmarkdown', 'Text'), 'options' => ['title' => Yii::t('kvmarkdown', 'Save as text')]],
-                        self::BTN_EXPORT_2 => ['icon' => 'floppy-saved', 'label' => Yii::t('kvmarkdown', 'HTML'), 'options' => ['title' => Yii::t('kvmarkdown', 'Save as HTML')]],
-                    ]],
-                ]
+                    self::BTN_EXPORT => [
+                        'icon' => $isBs4 ? 'file-export' : 'floppy-disk',
+                        'label' => Yii::t('kvmarkdown', 'Export'),
+                        'title' => Yii::t('kvmarkdown', 'Export content'),
+                        'class' => 'btn btn-sm btn-primary',
+                        'data-enabled' => true,
+                        'items' => [
+                            self::BTN_EXPORT_1 => [
+                                'icon' => $isBs4 ? 'file-alt' : 'floppy-save',
+                                'label' => Yii::t('kvmarkdown', 'Text'),
+                                'options' => ['title' => Yii::t('kvmarkdown', 'Save as text')],
+                            ],
+                            self::BTN_EXPORT_2 => [
+                                'icon' => $isBs4 ? 'file-invoice' : 'floppy-saved',
+                                'label' => Yii::t('kvmarkdown', 'HTML'),
+                                'options' => ['title' => Yii::t('kvmarkdown', 'Save as HTML')],
+                            ],
+                        ],
+                    ],
+                ],
             ],
             [
                 'buttons' => [
-                    self::BTN_PREVIEW => ['icon' => 'search', 'label' => Yii::t('kvmarkdown', 'Preview'), 'title' => Yii::t('kvmarkdown', 'Preview formatted text')],
-                ]
+                    self::BTN_PREVIEW => [
+                        'icon' => 'search',
+                        'label' => Yii::t('kvmarkdown', 'Preview'),
+                        'title' => Yii::t('kvmarkdown', 'Preview formatted text'),
+                    ],
+                ],
             ],
         ];
 

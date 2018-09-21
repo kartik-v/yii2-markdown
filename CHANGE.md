@@ -5,6 +5,8 @@ Change Log: `yii2-markdown`
 
 *Date:* 08-Jun-2018
 
+- Enhancements to support Bootstrap v4.x
+- Move all source code to `src` directory. 
 - (enh #69): Reorganize/Optimize code and convert to a jquery plugin.
 - (bug #66, #67, #68): Correct preview action response.
 - (enh #63): Add Marathi Translations.
