@@ -3,7 +3,7 @@ Change Log: `yii2-markdown`
 
 ## Version 1.3.1
 
-*Date:* 08-Jun-2018
+*Date:* 21-Sep-2018
 
 - Enhancements to support Bootstrap v4.x
 - Move all source code to `src` directory. 
