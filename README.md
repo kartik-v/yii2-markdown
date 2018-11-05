@@ -1,5 +1,15 @@
-yii2-markdown
-=============
+<h1 align="center">
+    <a href="http://demos.krajee.com" title="Krajee Demos" target="_blank">
+        <img src="http://kartik-v.github.io/bootstrap-fileinput-samples/samples/krajee-logo-b.png" alt="Krajee Logo"/>
+    </a>
+    <br>
+    yii2-markdown
+    <hr>
+    <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=DTP3NZQ6G2AYU"
+       title="Donate via Paypal" target="_blank">
+        <img src="http://kartik-v.github.io/bootstrap-fileinput-samples/samples/donate.png" alt="Donate"/>
+    </a>
+</h1>
 
 [![Stable Version](https://poser.pugx.org/kartik-v/yii2-markdown/v/stable)](https://packagist.org/packages/kartik-v/yii2-markdown)
 [![Unstable Version](https://poser.pugx.org/kartik-v/yii2-markdown/v/unstable)](https://packagist.org/packages/kartik-v/yii2-markdown)[![License](https://poser.pugx.org/kartik-v/yii2-markdown/license)](https://packagist.org/packages/kartik-v/yii2-markdown)
