@@ -68,23 +68,21 @@ class MarkdownViewer extends InputWidget
     }
 
     /**
-     * Render each button group in the toolbar
-     *
-     * @param array $group the button group configuration
-     * @param boolean $header whether the button group is part of the header
-     *
-     * @return string
+     * Render converted value
      */
-    protected function renderViewer($group, $header = true)
+    protected function renderViewer()
     {
         echo Html::beginTag('div', $this->containerOptions);
+        echo Html::beginTag('div', ['class' => 'kv-md-viewer']);
         if ($this->hasModel()) {
-            echo Markdown::convert(static::getAttributeValue($this->model, $this->attribute));
+            echo Markdown::convert(Html::getAttributeValue($this->model, $this->attribute));
         } else {
-            echo Markdown::convert(static::getAttributeValue($this->value));
+            echo Markdown::convert($this->value);
         }
         echo Html::endTag('div');
+        echo Html::endTag('div');
     }
+
 
     /**
      * Generate HTML identifiers for elements
