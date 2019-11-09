@@ -1,9 +1,15 @@
 Change Log: `yii2-markdown`
 ==========================
 
+## Version x.x.x
+
+*Date:* 09-Nov-2018
+
+- (enh #78): Add viewer input to use in readonly form:wq
+
 ## Version 1.3.1
 
-*Date:* 21-Sep-2018
+*Date:* 21-Sep-2018:wq
 
 - Enhancements to support Bootstrap v4.x
 - Move all source code to `src` directory. 

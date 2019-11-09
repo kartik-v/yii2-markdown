@@ -20,6 +20,16 @@
     padding: 1px;
 }
 
+.kv-md-viewer {
+    display: block;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 6px 12px;
+    background: #fff;
+    min-height: 1em;
+    color: black;
+}
+
 .kv-md-input {
     resize: none;
 }

@@ -131,6 +131,32 @@ echo MarkdownEditor::widget([
 ]);
 ```
 
+### MarkdownViewer
+```php
+// add this in your view
+use kartik\markdown\MarkdownViewer;
+
+// usage with model
+echo MarkdownViewer::widget([
+	'model' => $model, 
+	'attribute' => 'markdown',
+]);
+
+// usage without model
+echo MarkdownViewer::widget([
+	'name' => 'markdown', 
+	'value' => $value,
+]);
+
+// usage with ActiveForm
+$form = ActiveForm::begin([ /* omitted */ ])
+
+echo $form->field(
+    $model, 
+    'markdown'
+)->widget(MarkdownEditor::class);
+```
+
 ### Smarty Templates
 Smarty templates can be enabled globally by setting the module params
 ```php
