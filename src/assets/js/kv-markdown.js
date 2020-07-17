@@ -169,7 +169,7 @@
                     return $h.getMarkUp(txt, "`", "`");
                 case 15: // Code Block
                     var lang = prompt('Enter code language (e.g. html)', '');
-                    if (isEmpty(lang, true)) {
+                    if ($h.isEmpty(lang, true)) {
                         lang = '';
                     }
                     return $h.getMarkUp(txt, "~~~" + lang + " \n", "\n~~~  \n");
