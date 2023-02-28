@@ -1,6 +1,10 @@
 Change Log: `yii2-markdown`
 ==========================
 
+## Unreleased
+
+- fix php8 deprecation working when using bs3 (@maxxer)
+
 ## Version 1.3.1
 
 *Date:* 21-Sep-2018
