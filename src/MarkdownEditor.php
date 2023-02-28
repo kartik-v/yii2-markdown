@@ -590,7 +590,7 @@ EOT;
                 'buttons' => [
                     self::BTN_CODE => [
                         'label' => $isBs4 ? null : self::ICON_CODE,
-                        'icon' => $isBs4 ? 'code' : null,
+                        'icon' => $this->isBs(4) || $this->isBs(3) ? 'code' : null,
                         'title' => Yii::t('kvmarkdown', 'Inline Code'),
                         'encodeLabel' => false,
                     ],
